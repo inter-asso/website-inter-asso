@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 /**
  * Générer un JWT token
@@ -8,7 +8,7 @@ const generateToken = (userId) => {
   return jwt.sign(
     { id: userId },
     process.env.JWT_SECRET,
-    { expiresIn: '7d' } // Token valide 7 jours
+    { expiresIn: "7d" } // Token valide 7 jours
   );
 };
 
@@ -19,7 +19,7 @@ const generateRefreshToken = (userId) => {
   return jwt.sign(
     { id: userId },
     process.env.JWT_REFRESH_SECRET,
-    { expiresIn: '30d' } // Refresh token valide 30 jours
+    { expiresIn: "30d" } // Refresh token valide 30 jours
   );
 };
 
@@ -35,17 +35,17 @@ export const login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        error: 'Email et mot de passe requis'
+        error: "Email et mot de passe requis",
       });
     }
 
     // Chercher l'utilisateur
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: 'Identifiants invalides'
+        error: "Identifiants invalides",
       });
     }
 
@@ -55,7 +55,7 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        error: 'Identifiants invalides'
+        error: "Identifiants invalides",
       });
     }
 
@@ -70,7 +70,7 @@ export const login = async (req, res) => {
     // Réponse avec les tokens et les infos utilisateur
     res.json({
       success: true,
-      message: 'Connexion réussie',
+      message: "Connexion réussie",
       token,
       refreshToken,
       user: {
@@ -79,17 +79,17 @@ export const login = async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,
-        bdeId: user.bdeId
-      }
+        bdeId: user.bdeId,
+      },
     });
 
     console.log(`✅ Connexion réussie: ${user.email} (${user.role})`);
   } catch (error) {
-    console.error('❌ Erreur login:', error);
+    console.error("❌ Erreur login:", error);
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la connexion',
-      details: error.message
+      error: "Erreur lors de la connexion",
+      details: error.message,
     });
   }
 };
@@ -105,7 +105,7 @@ export const refresh = async (req, res) => {
     if (!refreshToken) {
       return res.status(400).json({
         success: false,
-        error: 'Refresh token manquant'
+        error: "Refresh token manquant",
       });
     }
 
@@ -117,20 +117,23 @@ export const refresh = async (req, res) => {
 
     res.json({
       success: true,
-      token: newToken
+      token: newToken,
     });
   } catch (error) {
-    if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+    if (
+      error.name === "JsonWebTokenError" ||
+      error.name === "TokenExpiredError"
+    ) {
       return res.status(401).json({
         success: false,
-        error: 'Refresh token invalide ou expiré'
+        error: "Refresh token invalide ou expiré",
       });
     }
 
     res.status(500).json({
       success: false,
-      error: 'Erreur lors du rafraîchissement du token',
-      details: error.message
+      error: "Erreur lors du rafraîchissement du token",
+      details: error.message,
     });
   }
 };
@@ -141,13 +144,15 @@ export const refresh = async (req, res) => {
  */
 export const getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id)
-      .populate('bdeId', 'name slug logo colors');
+    const user = await User.findById(req.user.id).populate(
+      "bdeId",
+      "name slug logo colors"
+    );
 
     if (!user) {
       return res.status(404).json({
         success: false,
-        error: 'Utilisateur non trouvé'
+        error: "Utilisateur non trouvé",
       });
     }
 
@@ -160,14 +165,14 @@ export const getMe = async (req, res) => {
         lastName: user.lastName,
         role: user.role,
         bde: user.bdeId,
-        lastLogin: user.lastLogin
-      }
+        lastLogin: user.lastLogin,
+      },
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération du profil',
-      details: error.message
+      error: "Erreur lors de la récupération du profil",
+      details: error.message,
     });
   }
 };
@@ -184,13 +189,13 @@ export const logout = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Déconnexion réussie'
+      message: "Déconnexion réussie",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la déconnexion',
-      details: error.message
+      error: "Erreur lors de la déconnexion",
+      details: error.message,
     });
   }
 };
@@ -207,19 +212,19 @@ export const updatePassword = async (req, res) => {
     if (!currentPassword || !newPassword) {
       return res.status(400).json({
         success: false,
-        error: 'Mot de passe actuel et nouveau mot de passe requis'
+        error: "Mot de passe actuel et nouveau mot de passe requis",
       });
     }
 
     if (newPassword.length < 6) {
       return res.status(400).json({
         success: false,
-        error: 'Le nouveau mot de passe doit contenir au moins 6 caractères'
+        error: "Le nouveau mot de passe doit contenir au moins 6 caractères",
       });
     }
 
     // Récupérer l'utilisateur avec le mot de passe
-    const user = await User.findById(req.user.id).select('+password');
+    const user = await User.findById(req.user.id).select("+password");
 
     // Vérifier le mot de passe actuel
     const isMatch = await user.comparePassword(currentPassword);
@@ -227,7 +232,7 @@ export const updatePassword = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        error: 'Mot de passe actuel incorrect'
+        error: "Mot de passe actuel incorrect",
       });
     }
 
@@ -239,13 +244,13 @@ export const updatePassword = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Mot de passe modifié avec succès'
+      message: "Mot de passe modifié avec succès",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la modification du mot de passe',
-      details: error.message
+      error: "Erreur lors de la modification du mot de passe",
+      details: error.message,
     });
   }
 };

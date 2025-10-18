@@ -1,11 +1,11 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from "cloudinary";
 
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true
+  secure: true,
 });
 
 /**
@@ -14,22 +14,21 @@ cloudinary.config({
  * @param {string} folder - Folder name in Cloudinary
  * @returns {Promise<Object>} - Upload result with url and public_id
  */
-export const uploadImage = async (fileBuffer, folder = 'emmi-wave/general') => {
+export const uploadImage = async (fileBuffer, folder = "emmi-wave/general") => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder: folder,
-        resource_type: 'auto',
-        transformation: [
-          { quality: 'auto', fetch_format: 'auto' }
-        ]
+        resource_type: "auto",
+        transformation: [{ quality: "auto", fetch_format: "auto" }],
       },
       (error, result) => {
         if (error) reject(error);
-        else resolve({
-          url: result.secure_url,
-          publicId: result.public_id
-        });
+        else
+          resolve({
+            url: result.secure_url,
+            publicId: result.public_id,
+          });
       }
     );
     uploadStream.end(fileBuffer);
@@ -46,7 +45,9 @@ export const deleteImage = async (publicId) => {
     const result = await cloudinary.uploader.destroy(publicId);
     return result;
   } catch (error) {
-    throw new Error(`Erreur lors de la suppression de l'image: ${error.message}`);
+    throw new Error(
+      `Erreur lors de la suppression de l'image: ${error.message}`
+    );
   }
 };
 

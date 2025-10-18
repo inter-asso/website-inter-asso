@@ -1,6 +1,6 @@
-import BDE from '../models/BDE.js';
-import Event from '../models/Event.js';
-import Member from '../models/Member.js';
+import BDE from "../models/BDE.js";
+import Event from "../models/Event.js";
+import Member from "../models/Member.js";
 
 /**
  * @route   GET /api/bdes
@@ -9,20 +9,18 @@ import Member from '../models/Member.js';
  */
 export const getBDEs = async (req, res) => {
   try {
-    const bdes = await BDE.find()
-      .select('-__v')
-      .sort({ displayOrder: 1 });
+    const bdes = await BDE.find().select("-__v").sort({ displayOrder: 1 });
 
     res.json({
       success: true,
       count: bdes.length,
-      bdes
+      bdes,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération des BDE',
-      details: error.message
+      error: "Erreur lors de la récupération des BDE",
+      details: error.message,
     });
   }
 };
@@ -36,25 +34,24 @@ export const getBDEBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
 
-    const bde = await BDE.findOne({ slug })
-      .select('-__v');
+    const bde = await BDE.findOne({ slug }).select("-__v");
 
     if (!bde) {
       return res.status(404).json({
         success: false,
-        error: 'BDE non trouvé'
+        error: "BDE non trouvé",
       });
     }
 
     res.json({
       success: true,
-      bde
+      bde,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération du BDE',
-      details: error.message
+      error: "Erreur lors de la récupération du BDE",
+      details: error.message,
     });
   }
 };
@@ -75,26 +72,30 @@ export const getBDEEvents = async (req, res) => {
     if (!bde) {
       return res.status(404).json({
         success: false,
-        error: 'BDE non trouvé'
+        error: "BDE non trouvé",
       });
     }
 
     // Filtrer par statut (PUBLISHED par défaut pour le public)
     const filter = { bdeId: bde._id };
-    
+
     // Si l'utilisateur est admin de ce BDE, il peut voir tous les statuts
-    if (req.user && req.user.role === 'admin_bde' && req.user.bdeId?.toString() === bde._id.toString()) {
+    if (
+      req.user &&
+      req.user.role === "admin_bde" &&
+      req.user.bdeId?.toString() === bde._id.toString()
+    ) {
       if (status) filter.status = status;
-    } else if (req.user && req.user.role === 'admin_interasso') {
+    } else if (req.user && req.user.role === "admin_interasso") {
       // Admin Interasso peut voir tous les statuts
       if (status) filter.status = status;
     } else {
       // Public : uniquement PUBLISHED
-      filter.status = 'PUBLISHED';
+      filter.status = "PUBLISHED";
     }
 
     const events = await Event.find(filter)
-      .populate('createdBy', 'firstName lastName')
+      .populate("createdBy", "firstName lastName")
       .sort({ startDate: -1 })
       .limit(parseInt(limit));
 
@@ -105,15 +106,15 @@ export const getBDEEvents = async (req, res) => {
         name: bde.name,
         slug: bde.slug,
         logo: bde.logo,
-        colors: bde.colors
+        colors: bde.colors,
       },
-      events
+      events,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération des événements',
-      details: error.message
+      error: "Erreur lors de la récupération des événements",
+      details: error.message,
     });
   }
 };
@@ -133,12 +134,12 @@ export const getBDEMembers = async (req, res) => {
     if (!bde) {
       return res.status(404).json({
         success: false,
-        error: 'BDE non trouvé'
+        error: "BDE non trouvé",
       });
     }
 
     const members = await Member.find({ bdeId: bde._id })
-      .select('-__v')
+      .select("-__v")
       .sort({ displayOrder: 1 });
 
     res.json({
@@ -148,15 +149,15 @@ export const getBDEMembers = async (req, res) => {
         name: bde.name,
         slug: bde.slug,
         logo: bde.logo,
-        colors: bde.colors
+        colors: bde.colors,
       },
-      members
+      members,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération des membres',
-      details: error.message
+      error: "Erreur lors de la récupération des membres",
+      details: error.message,
     });
   }
 };
@@ -172,42 +173,41 @@ export const updateBDE = async (req, res) => {
     const updates = req.body;
 
     // Seul Admin Interasso peut modifier les BDE
-    if (req.user.role !== 'admin_interasso') {
+    if (req.user.role !== "admin_interasso") {
       return res.status(403).json({
         success: false,
-        error: 'Accès refusé - Réservé aux administrateurs Interasso'
+        error: "Accès refusé - Réservé aux administrateurs Interasso",
       });
     }
 
     // Champs modifiables
     const allowedFields = [
-      'name',
-      'fullName',
-      'description',
-      'logo',
-      'colors',
-      'socialLinks',
-      'contactEmail',
-      'displayOrder'
+      "name",
+      "fullName",
+      "description",
+      "logo",
+      "colors",
+      "socialLinks",
+      "contactEmail",
+      "displayOrder",
     ];
 
     const filteredUpdates = {};
-    allowedFields.forEach(field => {
+    allowedFields.forEach((field) => {
       if (updates[field] !== undefined) {
         filteredUpdates[field] = updates[field];
       }
     });
 
-    const bde = await BDE.findByIdAndUpdate(
-      id,
-      filteredUpdates,
-      { new: true, runValidators: true }
-    );
+    const bde = await BDE.findByIdAndUpdate(id, filteredUpdates, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!bde) {
       return res.status(404).json({
         success: false,
-        error: 'BDE non trouvé'
+        error: "BDE non trouvé",
       });
     }
 
@@ -215,14 +215,14 @@ export const updateBDE = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'BDE modifié avec succès',
-      bde
+      message: "BDE modifié avec succès",
+      bde,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la modification du BDE',
-      details: error.message
+      error: "Erreur lors de la modification du BDE",
+      details: error.message,
     });
   }
 };
@@ -235,10 +235,10 @@ export const updateBDE = async (req, res) => {
 export const createBDE = async (req, res) => {
   try {
     // Seul Admin Interasso peut créer des BDE
-    if (req.user.role !== 'admin_interasso') {
+    if (req.user.role !== "admin_interasso") {
       return res.status(403).json({
         success: false,
-        error: 'Accès refusé - Réservé aux administrateurs Interasso'
+        error: "Accès refusé - Réservé aux administrateurs Interasso",
       });
     }
 
@@ -248,21 +248,21 @@ export const createBDE = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'BDE créé avec succès',
-      bde
+      message: "BDE créé avec succès",
+      bde,
     });
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).json({
         success: false,
-        error: 'Un BDE avec ce nom ou slug existe déjà'
+        error: "Un BDE avec ce nom ou slug existe déjà",
       });
     }
 
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la création du BDE',
-      details: error.message
+      error: "Erreur lors de la création du BDE",
+      details: error.message,
     });
   }
 };
@@ -281,39 +281,45 @@ export const getBDEStats = async (req, res) => {
     if (!bde) {
       return res.status(404).json({
         success: false,
-        error: 'BDE non trouvé'
+        error: "BDE non trouvé",
       });
     }
 
-    const [totalEvents, publishedEvents, pendingEvents, rejectedEvents, totalMembers] = await Promise.all([
+    const [
+      totalEvents,
+      publishedEvents,
+      pendingEvents,
+      rejectedEvents,
+      totalMembers,
+    ] = await Promise.all([
       Event.countDocuments({ bdeId: bde._id }),
-      Event.countDocuments({ bdeId: bde._id, status: 'PUBLISHED' }),
-      Event.countDocuments({ bdeId: bde._id, status: 'PENDING' }),
-      Event.countDocuments({ bdeId: bde._id, status: 'REJECTED' }),
-      Member.countDocuments({ bdeId: bde._id })
+      Event.countDocuments({ bdeId: bde._id, status: "PUBLISHED" }),
+      Event.countDocuments({ bdeId: bde._id, status: "PENDING" }),
+      Event.countDocuments({ bdeId: bde._id, status: "REJECTED" }),
+      Member.countDocuments({ bdeId: bde._id }),
     ]);
 
     res.json({
       success: true,
       bde: {
         name: bde.name,
-        slug: bde.slug
+        slug: bde.slug,
       },
       stats: {
         events: {
           total: totalEvents,
           published: publishedEvents,
           pending: pendingEvents,
-          rejected: rejectedEvents
+          rejected: rejectedEvents,
         },
-        members: totalMembers
-      }
+        members: totalMembers,
+      },
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération des statistiques',
-      details: error.message
+      error: "Erreur lors de la récupération des statistiques",
+      details: error.message,
     });
   }
 };

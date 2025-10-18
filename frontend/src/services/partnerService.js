@@ -1,4 +1,4 @@
-import api from './api';
+import api from "./api";
 
 const partnerService = {
   // Récupérer tous les partenaires
@@ -16,7 +16,7 @@ const partnerService = {
 
   // Créer un partenaire (Admin Interasso)
   createPartner: async (partnerData) => {
-    const response = await api.post('/partners', partnerData);
+    const response = await api.post("/partners", partnerData);
     return response.data;
   },
 

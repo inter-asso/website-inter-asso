@@ -96,22 +96,25 @@ Merci de contribuer au site du BDE Emmi Wave ! Ce guide vous aidera à ajouter o
 
 1. **Fork** le repository
 2. **Clone** votre fork :
+
    ```bash
    git clone https://github.com/votre-username/bde-emmi-wave.git
    cd bde-emmi-wave
    ```
 
 3. **Créez une branche** :
+
    ```bash
    git checkout -b feature/ma-fonctionnalite
    ```
 
 4. **Installez les dépendances** :
+
    ```bash
    # Frontend
    cd frontend
    npm install
-   
+
    # Backend
    cd ../backend
    npm install
@@ -120,18 +123,21 @@ Merci de contribuer au site du BDE Emmi Wave ! Ce guide vous aidera à ajouter o
 5. **Faites vos modifications**
 
 6. **Testez** :
+
    ```bash
    npm run lint
    npm test
    ```
 
 7. **Commit** avec un message clair :
+
    ```bash
    git add .
    git commit -m "feat: ajout du système de notification"
    ```
 
 8. **Push** :
+
    ```bash
    git push origin feature/ma-fonctionnalite
    ```
@@ -151,6 +157,7 @@ Utilisez les préfixes suivants :
 - `chore:` Maintenance
 
 **Exemples :**
+
 ```bash
 feat: ajout du système de notification par email
 fix: correction bug upload image sur mobile
@@ -165,16 +172,19 @@ style: formatage des fichiers avec Prettier
 ### Bonnes pratiques
 
 1. **Code propre et lisible**
+
    - Commentez les parties complexes
    - Utilisez des noms de variables explicites
    - Respectez l'indentation
 
 2. **Avant de commit**
+
    - Testez localement
    - Vérifiez qu'il n'y a pas d'erreurs ESLint
    - Formatez avec Prettier
 
 3. **Sécurité**
+
    - ❌ Ne **JAMAIS** commit de secrets (API keys, passwords)
    - ✅ Utilisez les fichiers `.env`
    - ✅ Ajoutez `.env` au `.gitignore`
@@ -198,6 +208,7 @@ style: formatage des fichiers avec Prettier
 ### Problèmes courants
 
 **Erreur d'installation npm**
+
 ```bash
 # Supprimez node_modules et réinstallez
 rm -rf node_modules package-lock.json
@@ -205,10 +216,12 @@ npm install
 ```
 
 **Erreur de connexion MongoDB**
+
 - Vérifiez votre `.env`
 - Vérifiez votre IP dans MongoDB Atlas whitelist
 
 **Erreur Cloudinary**
+
 - Vérifiez vos credentials dans `.env`
 - Vérifiez que le cloud_name est correct
 

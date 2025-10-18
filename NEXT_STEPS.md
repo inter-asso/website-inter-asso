@@ -3,17 +3,20 @@
 ## ✅ Ce qui a été fait (Phase 1 - Semaine 1)
 
 ### Structure du projet
+
 - ✅ Dossiers `frontend/`, `backend/`, `docs/` créés
 - ✅ `.gitignore` configuré
 - ✅ README.md et CONTRIBUTING.md créés
 - ✅ DOCUMENTATION_TECHNIQUE.md complète
 
 ### Frontend
+
 - ✅ Projet React initialisé avec Vite
 - ✅ Tailwind CSS configuré
 - ✅ Structure de dossiers préparée
 
 ### Backend
+
 - ✅ Projet Node.js/Express initialisé
 - ✅ Toutes les dépendances installées :
   - Express, Mongoose, dotenv
@@ -38,6 +41,7 @@
 ### 1. Configuration des services externes (20 min)
 
 #### A. MongoDB Atlas (GRATUIT)
+
 1. Aller sur https://www.mongodb.com/cloud/atlas/register
 2. Créer un compte gratuit
 3. Créer un cluster (M0 - FREE)
@@ -50,6 +54,7 @@
    ```
 
 #### B. Cloudinary (GRATUIT)
+
 1. Aller sur https://cloudinary.com/users/register_free
 2. Créer un compte gratuit
 3. Dans le Dashboard, noter :
@@ -64,13 +69,16 @@
    ```
 
 #### C. Sécuriser JWT
+
 Dans `backend/.env`, changer les secrets JWT :
+
 ```env
 JWT_SECRET=generer_une_cle_aleatoire_tres_longue_ici
 JWT_REFRESH_SECRET=generer_une_autre_cle_differente
 ```
 
 💡 **Astuce** : Générer des clés aléatoires avec Node.js :
+
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
@@ -83,6 +91,7 @@ npm run dev
 ```
 
 Devrait afficher :
+
 ```
 ✅ MongoDB connecté: cluster0...
 🚀 Serveur démarré sur le port 5000
@@ -90,6 +99,7 @@ Devrait afficher :
 
 Tester dans le navigateur : http://localhost:5000
 Devrait afficher :
+
 ```json
 {
   "message": "Bienvenue sur l'API du BDE Emmi Wave! 🌊",
@@ -101,11 +111,13 @@ Devrait afficher :
 ### 3. Compléter le frontend (30 min)
 
 #### A. Créer les fichiers CSS
+
 ```bash
 cd frontend
 ```
 
 Modifier `src/index.css` pour ajouter Tailwind :
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -113,32 +125,38 @@ Modifier `src/index.css` pour ajouter Tailwind :
 ```
 
 #### B. Installer les dépendances restantes
+
 ```bash
 cd frontend
 npm install axios react-router-dom react-hook-form framer-motion gsap
 ```
 
 #### C. Créer le fichier `.env`
+
 ```env
 VITE_API_URL=http://localhost:5000/api/v1
 ```
 
 #### D. Tester le frontend
+
 ```bash
 npm run dev
 ```
 
-Devrait ouvrir http://localhost:5173
+Devrait ouvrir http://localhost:5000
 
 ## 🔄 Phase suivante : Semaine 2
 
 ### À faire :
+
 1. **Middleware d'authentification JWT**
+
    - Créer `middleware/auth.js`
    - Créer `middleware/upload.js` (Multer + Cloudinary)
    - Créer `middleware/validation.js`
 
 2. **Controllers & Routes**
+
    - Auth (register, login, logout)
    - Events (CRUD complet)
    - Partners (CRUD complet)
@@ -146,6 +164,7 @@ Devrait ouvrir http://localhost:5173
    - Adhesions (CRUD complet)
 
 3. **Frontend - Composants de base**
+
    - Header, Footer, Navigation
    - Button, Card (composants réutilisables)
    - Layout principal
@@ -158,6 +177,7 @@ Devrait ouvrir http://localhost:5173
 ## 📚 Ressources utiles
 
 ### Documentation
+
 - **React** : https://react.dev/
 - **Tailwind** : https://tailwindcss.com/docs
 - **Express** : https://expressjs.com/
@@ -166,6 +186,7 @@ Devrait ouvrir http://localhost:5173
 - **GSAP** : https://greensock.com/docs/
 
 ### Tutoriels rapides
+
 - MongoDB Atlas : https://www.mongodb.com/basics/get-started
 - Cloudinary Upload : https://cloudinary.com/documentation/upload_images
 - JWT Authentication : https://jwt.io/introduction
@@ -173,18 +194,24 @@ Devrait ouvrir http://localhost:5173
 ## 🆘 Problèmes courants
 
 ### "MongoDB connection error"
+
 ➡️ Vérifiez :
+
 - Votre `MONGODB_URI` dans `.env`
 - Que votre IP est dans Network Access (MongoDB Atlas)
 - Que l'utilisateur DB a les bons droits
 
 ### "Cloudinary error"
+
 ➡️ Vérifiez :
+
 - Les credentials dans `.env`
 - Le `cloud_name` est correct (sans espaces)
 
 ### "Port 5000 already in use"
+
 ➡️ Changez le port dans `.env` :
+
 ```env
 PORT=5001
 ```

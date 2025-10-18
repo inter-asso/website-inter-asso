@@ -19,7 +19,9 @@
 ## 🎯 Vue d'ensemble du projet
 
 ### Objectif
+
 Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'école, permettant de :
+
 - **Présenter les 5 BDE** et leurs membres respectifs
 - **Promouvoir les événements** de chaque BDE avec système de validation
 - **Gérer les partenariats** communs à tous les BDE
@@ -27,6 +29,7 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 - **Offrir une expérience utilisateur unifiée** pour tous les étudiants
 
 ### Les 5 BDE d'Interasso
+
 1. **BDE MMI** (Métiers du Multimédia et de l'Internet) - Logo violet/noir "Emmi Wave"
 2. **BDE [À définir]** - Nom et identité à compléter
 3. **BDE [À définir]** - Nom et identité à compléter
@@ -34,7 +37,9 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 5. **BDE [À définir]** - Nom et identité à compléter
 
 ### Concept Interasso
+
 **Interasso** est l'association centrale qui :
+
 - Regroupe et coordonne les 5 BDE
 - Gère les partenariats communs (restaurants, commerces, etc.)
 - **Valide les événements** proposés par chaque BDE
@@ -42,6 +47,7 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 - Centralise la communication étudiante
 
 ### Public cible
+
 - **Étudiants** de l'école (tous les départements)
 - **Membres des bureaux** des 5 BDE
 - **Administrateurs Interasso**
@@ -173,9 +179,11 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 ### Types de comptes
 
 #### 1. Admin Interasso (Super Admin)
+
 **Nombre** : 1 compte (ou 2-3 membres clés)
 
 **Permissions** :
+
 - ✅ **Événements** : Valider/Refuser tous les événements soumis
 - ✅ **Partenaires** : CRUD complet (Create, Read, Update, Delete)
 - ✅ **BDE** : Modifier les informations des 5 BDE
@@ -184,13 +192,16 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 - ✅ **Statistiques** : Accès à toutes les analytics
 
 **Restrictions** :
+
 - ❌ Ne peut pas créer d'événements directement (doit passer par un BDE)
 - ❌ Ne peut pas modifier les membres d'un bureau BDE
 
 #### 2. Admin BDE (5 comptes)
+
 **Nombre** : 5 comptes (1 par BDE)
 
 **Permissions** :
+
 - ✅ **Événements de son BDE** : Créer, Modifier, Supprimer
 - ✅ **Membres de son bureau** : CRUD complet
 - ✅ **Partenaires** : Lecture seule (peut consulter)
@@ -198,13 +209,16 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 - ✅ **Notifications** : Recevoir alertes validation
 
 **Restrictions** :
+
 - ❌ Ne peut pas valider ses propres événements
 - ❌ Ne peut pas voir/modifier les autres BDE
 - ❌ Ne peut pas gérer les partenaires
 - ❌ Ne peut pas créer d'autres comptes
 
 #### 3. Public (Non connecté)
+
 **Permissions** :
+
 - ✅ Voir tous les événements **PUBLISHED**
 - ✅ Voir tous les membres des bureaux
 - ✅ Voir tous les partenaires
@@ -212,36 +226,37 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 - ✅ Contacter via formulaire
 
 **Restrictions** :
+
 - ❌ Pas d'accès aux dashboards
 - ❌ Ne voit pas les événements PENDING/REJECTED
 
 ### Matrice de permissions
 
-| Action | Admin Interasso | Admin BDE | Public |
-|--------|----------------|-----------|--------|
-| **Événements** |
-| Créer événement | ❌ | ✅ (son BDE) | ❌ |
-| Modifier événement | ✅ (tous) | ✅ (son BDE, si PENDING) | ❌ |
-| Supprimer événement | ✅ (tous) | ✅ (son BDE) | ❌ |
-| Valider événement | ✅ | ❌ | ❌ |
-| Voir événements PUBLISHED | ✅ | ✅ | ✅ |
-| Voir événements PENDING | ✅ | ✅ (les siens) | ❌ |
-| **Membres** |
-| Ajouter membre | ❌ | ✅ (son bureau) | ❌ |
-| Modifier membre | ❌ | ✅ (son bureau) | ❌ |
-| Supprimer membre | ❌ | ✅ (son bureau) | ❌ |
-| Voir membres | ✅ | ✅ | ✅ |
-| **Partenaires** |
-| Ajouter partenaire | ✅ | ❌ | ❌ |
-| Modifier partenaire | ✅ | ❌ | ❌ |
-| Supprimer partenaire | ✅ | ❌ | ❌ |
-| Voir partenaires | ✅ | ✅ | ✅ |
-| **BDE** |
-| Modifier infos BDE | ✅ | ❌ | ❌ |
-| Voir infos BDE | ✅ | ✅ | ✅ |
-| **Utilisateurs** |
-| Créer compte BDE | ✅ | ❌ | ❌ |
-| Modifier compte BDE | ✅ | ❌ | ❌ |
+| Action                    | Admin Interasso | Admin BDE                | Public |
+| ------------------------- | --------------- | ------------------------ | ------ |
+| **Événements**            |
+| Créer événement           | ❌              | ✅ (son BDE)             | ❌     |
+| Modifier événement        | ✅ (tous)       | ✅ (son BDE, si PENDING) | ❌     |
+| Supprimer événement       | ✅ (tous)       | ✅ (son BDE)             | ❌     |
+| Valider événement         | ✅              | ❌                       | ❌     |
+| Voir événements PUBLISHED | ✅              | ✅                       | ✅     |
+| Voir événements PENDING   | ✅              | ✅ (les siens)           | ❌     |
+| **Membres**               |
+| Ajouter membre            | ❌              | ✅ (son bureau)          | ❌     |
+| Modifier membre           | ❌              | ✅ (son bureau)          | ❌     |
+| Supprimer membre          | ❌              | ✅ (son bureau)          | ❌     |
+| Voir membres              | ✅              | ✅                       | ✅     |
+| **Partenaires**           |
+| Ajouter partenaire        | ✅              | ❌                       | ❌     |
+| Modifier partenaire       | ✅              | ❌                       | ❌     |
+| Supprimer partenaire      | ✅              | ❌                       | ❌     |
+| Voir partenaires          | ✅              | ✅                       | ✅     |
+| **BDE**                   |
+| Modifier infos BDE        | ✅              | ❌                       | ❌     |
+| Voir infos BDE            | ✅              | ✅                       | ✅     |
+| **Utilisateurs**          |
+| Créer compte BDE          | ✅              | ❌                       | ❌     |
+| Modifier compte BDE       | ✅              | ❌                       | ❌     |
 
 ---
 
@@ -249,38 +264,38 @@ Créer une **plateforme centralisée Interasso** regroupant **5 BDE** de l'écol
 
 ### Frontend
 
-| Technologie | Version | Rôle |
-|------------|---------|------|
-| **React** | 18.x | Framework principal |
-| **JavaScript** | ES6+ | Langage de programmation |
-| **Tailwind CSS** | 3.x | Framework CSS utilitaire |
-| **Magic UI** | Latest | Bibliothèque de composants |
-| **GSAP** | 3.x | Animations avancées |
-| **React Router** | 6.x | Navigation + Protected Routes |
-| **Axios** | 1.x | Requêtes HTTP |
-| **React Hook Form** | 7.x | Gestion des formulaires |
-| **Framer Motion** | 10.x | Animations complémentaires |
-| **React Query** | 4.x | State management API |
-| **Zustand** | 4.x | State management global |
+| Technologie         | Version | Rôle                          |
+| ------------------- | ------- | ----------------------------- |
+| **React**           | 18.x    | Framework principal           |
+| **JavaScript**      | ES6+    | Langage de programmation      |
+| **Tailwind CSS**    | 3.x     | Framework CSS utilitaire      |
+| **Magic UI**        | Latest  | Bibliothèque de composants    |
+| **GSAP**            | 3.x     | Animations avancées           |
+| **React Router**    | 6.x     | Navigation + Protected Routes |
+| **Axios**           | 1.x     | Requêtes HTTP                 |
+| **React Hook Form** | 7.x     | Gestion des formulaires       |
+| **Framer Motion**   | 10.x    | Animations complémentaires    |
+| **React Query**     | 4.x     | State management API          |
+| **Zustand**         | 4.x     | State management global       |
 
 ### Backend
 
-| Technologie | Version | Rôle |
-|------------|---------|------|
-| **Node.js** | 18.x LTS | Runtime JavaScript |
-| **Express.js** | 4.x | Framework web |
-| **JavaScript** | ES6+ | Langage de programmation |
-| **MongoDB** | 6.x | Base de données NoSQL |
-| **Mongoose** | 7.x | ODM MongoDB |
-| **JWT** | 9.x | Authentication tokens |
-| **bcrypt** | 5.x | Hashage de mots de passe |
-| **Multer** | 1.x | Upload de fichiers |
-| **Cloudinary** | 1.x | Stockage d'images |
-| **Nodemailer** | 6.x | Envoi d'emails |
-| **dotenv** | 16.x | Variables d'environnement |
-| **CORS** | 2.x | Gestion CORS |
-| **Helmet** | 8.x | Sécurité headers |
-| **express-rate-limit** | 8.x | Rate limiting |
+| Technologie            | Version  | Rôle                      |
+| ---------------------- | -------- | ------------------------- |
+| **Node.js**            | 18.x LTS | Runtime JavaScript        |
+| **Express.js**         | 4.x      | Framework web             |
+| **JavaScript**         | ES6+     | Langage de programmation  |
+| **MongoDB**            | 6.x      | Base de données NoSQL     |
+| **Mongoose**           | 7.x      | ODM MongoDB               |
+| **JWT**                | 9.x      | Authentication tokens     |
+| **bcrypt**             | 5.x      | Hashage de mots de passe  |
+| **Multer**             | 1.x      | Upload de fichiers        |
+| **Cloudinary**         | 1.x      | Stockage d'images         |
+| **Nodemailer**         | 6.x      | Envoi d'emails            |
+| **dotenv**             | 16.x     | Variables d'environnement |
+| **CORS**               | 2.x      | Gestion CORS              |
+| **Helmet**             | 8.x      | Sécurité headers          |
+| **express-rate-limit** | 8.x      | Rate limiting             |
 
 ---
 
@@ -472,12 +487,14 @@ backend/
 ### 1. Page d'accueil (Publique)
 
 #### Hero Section Interasso
+
 - **Logo Interasso** avec animation GSAP
 - **Slogan** : "5 BDE, 1 communauté"
 - **Call-to-action** : Explorer les BDE
 - **Animation** : Effet wave sur le background
 
 #### Section "Les 5 BDE"
+
 - **Grille interactive** des 5 BDE
 - Chaque card affiche :
   - Logo du BDE
@@ -490,15 +507,18 @@ backend/
 - **Click** : Redirection vers page dédiée du BDE
 
 #### Événements à venir (tous BDE)
+
 - **Carousel** des prochains événements
 - **Badge** indiquant le BDE organisateur (logo + couleur)
 - Filtres rapides par BDE
 
 #### Partenaires communs
+
 - **Marquee** avec logos partenaires
 - Catégories : Restauration, Culture, Sport, Commerce
 
 #### Statistiques globales
+
 ```
 ┌──────────────────────────────────────────────┐
 │  🎓 5 BDE    |   📅 24 événements à venir    │
@@ -511,28 +531,33 @@ backend/
 **URL** : `/bde/emmi-wave` ou `/bde/:slug`
 
 #### Header BDE
+
 - Logo + couleurs du BDE
 - Nom complet
 - Présentation (2-3 lignes)
 - Réseaux sociaux du BDE
 
 #### Bureau du BDE
+
 - **Cards des membres** avec photo, nom, rôle
 - Animation GSAP au scroll
 - Click → Modal avec bio complète
 
 #### Événements du BDE
+
 - **Liste filtrée** : uniquement événements de ce BDE
 - Tri par date (à venir / passés)
 - Status PUBLISHED uniquement
 
 #### Call-to-action
+
 - Suivre le BDE (lien Instagram/Facebook)
 - Contacter le bureau
 
 ### 3. Page Événements (Publique)
 
 #### Fonctionnalités
+
 - **Liste complète** de tous les événements PUBLISHED
 - **Filtres** :
   - Par BDE (dropdown avec les 5 BDE)
@@ -545,6 +570,7 @@ backend/
   - Vue liste
 
 #### Event Card
+
 ```
 ┌────────────────────────────────────┐
 │  [IMAGE COVER]                     │
@@ -559,6 +585,7 @@ backend/
 ```
 
 #### Détails d'un événement
+
 - Titre, date, lieu, BDE organisateur
 - Description complète
 - Galerie photos
@@ -570,6 +597,7 @@ backend/
 **Accès** : `/dashboard/interasso` (protégé, role: admin_interasso)
 
 #### Vue d'ensemble
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  📊 Statistiques globales                       │
@@ -597,24 +625,27 @@ backend/
 ```
 
 #### Sections
+
 1. **Validation événements**
    - Liste des événements PENDING
    - Modal de détails complet
    - Boutons Accepter/Refuser
    - Champ "Raison du refus" (si rejet)
-   
 2. **Gestion partenaires**
+
    - CRUD complet
    - Upload logo
    - Catégories
    - Avantages pour étudiants
 
 3. **Gestion BDE**
+
    - Modifier infos des 5 BDE
    - Logos, couleurs, descriptions
    - Activer/Désactiver un BDE
 
 4. **Gestion utilisateurs**
+
    - Créer les 5 comptes Admin BDE
    - Modifier emails/mots de passe
    - Réinitialiser accès
@@ -629,6 +660,7 @@ backend/
 **Accès** : `/dashboard/bde` (protégé, role: admin_bde)
 
 #### Vue d'ensemble (Mon BDE)
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  📊 BDE MMI - Tableau de bord                   │
@@ -648,7 +680,9 @@ backend/
 ```
 
 #### Sections
+
 1. **Mes événements**
+
    - Liste de tous les événements de son BDE
    - Status : PENDING / PUBLISHED / REJECTED
    - Créer nouvel événement
@@ -656,6 +690,7 @@ backend/
    - Supprimer événements
 
 2. **Formulaire création événement**
+
    ```javascript
    {
      title: "Nom de l'événement",
@@ -675,6 +710,7 @@ backend/
    ```
 
 3. **Membres de mon bureau**
+
    - CRUD complet des membres
    - Upload photos
    - Ordre d'affichage (drag & drop)
@@ -687,6 +723,7 @@ backend/
 ### 6. Page Partenaires (Publique)
 
 #### Affichage
+
 - **Grille responsive** de logos
 - **Catégories** :
   - 🍔 Restauration
@@ -696,6 +733,7 @@ backend/
   - 🎓 Autres
 
 #### Partner Card
+
 ```
 ┌────────────────────────────────┐
 │  [LOGO PARTENAIRE]             │
@@ -710,6 +748,7 @@ backend/
 ```
 
 #### Détails partenaire
+
 - Logo, nom, description
 - **Avantages** pour adhérents
 - Site web, adresse
@@ -722,6 +761,7 @@ backend/
 ### Collections MongoDB
 
 #### 1. Collection `users`
+
 **Administrateurs** (Interasso + 5 BDE)
 
 ```javascript
@@ -740,6 +780,7 @@ backend/
 ```
 
 **Indexes** :
+
 ```javascript
 userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ role: 1 });
@@ -747,6 +788,7 @@ userSchema.index({ bdeId: 1 });
 ```
 
 #### 2. Collection `bdes`
+
 **Les 5 BDE**
 
 ```javascript
@@ -779,6 +821,7 @@ userSchema.index({ bdeId: 1 });
 ```
 
 **Indexes** :
+
 ```javascript
 bdeSchema.index({ slug: 1 }, { unique: true });
 bdeSchema.index({ isActive: 1 });
@@ -786,6 +829,7 @@ bdeSchema.index({ displayOrder: 1 });
 ```
 
 #### 3. Collection `events`
+
 **Événements avec validation**
 
 ```javascript
@@ -809,27 +853,28 @@ bdeSchema.index({ displayOrder: 1 });
   },
   maxParticipants: Number,
   price: Number,
-  
+
   // NOUVEAU: Système de validation
   status: String,             // "PENDING" | "PUBLISHED" | "REJECTED"
   bdeId: ObjectId,            // Référence au BDE organisateur
   createdBy: ObjectId,        // Référence au user qui a créé
-  
+
   // Si PUBLISHED
   publishedAt: Date,
   publishedBy: ObjectId,      // Admin Interasso qui a validé
-  
+
   // Si REJECTED
   rejectionReason: String,
   rejectedAt: Date,
   rejectedBy: ObjectId,
-  
+
   createdAt: Date,
   updatedAt: Date
 }
 ```
 
 **Indexes** :
+
 ```javascript
 eventSchema.index({ status: 1 });
 eventSchema.index({ bdeId: 1 });
@@ -839,25 +884,27 @@ eventSchema.index({ createdBy: 1 });
 ```
 
 **Middleware** :
+
 ```javascript
 // Auto-génération du slug
-eventSchema.pre('save', function(next) {
-  if (this.isModified('title')) {
+eventSchema.pre("save", function (next) {
+  if (this.isModified("title")) {
     this.slug = slugify(this.title);
   }
   next();
 });
 
 // Par défaut: status PENDING
-eventSchema.pre('save', function(next) {
+eventSchema.pre("save", function (next) {
   if (this.isNew) {
-    this.status = 'PENDING';
+    this.status = "PENDING";
   }
   next();
 });
 ```
 
 #### 4. Collection `members`
+
 **Membres des bureaux par BDE**
 
 ```javascript
@@ -873,10 +920,10 @@ eventSchema.pre('save', function(next) {
   bio: String,
   email: String,
   promotion: String,          // "2024-2025"
-  
+
   // NOUVEAU: Référence au BDE
   bdeId: ObjectId,            // Référence au BDE
-  
+
   socialLinks: {
     linkedin: String,
     instagram: String
@@ -889,6 +936,7 @@ eventSchema.pre('save', function(next) {
 ```
 
 **Indexes** :
+
 ```javascript
 memberSchema.index({ bdeId: 1 });
 memberSchema.index({ isActive: 1 });
@@ -896,6 +944,7 @@ memberSchema.index({ displayOrder: 1 });
 ```
 
 #### 5. Collection `partners`
+
 **Partenaires communs** (pas de changement)
 
 ```javascript
@@ -926,6 +975,7 @@ memberSchema.index({ displayOrder: 1 });
 ```
 
 #### 6. Collection `notifications`
+
 **Système de notifications** (NOUVEAU)
 
 ```javascript
@@ -934,24 +984,25 @@ memberSchema.index({ displayOrder: 1 });
   type: String,               // "EVENT_SUBMITTED" | "EVENT_VALIDATED" | "EVENT_REJECTED"
   title: String,
   message: String,
-  
+
   // Destinataire
   recipientId: ObjectId,      // User qui reçoit la notif
   recipientRole: String,      // "admin_interasso" | "admin_bde"
-  
+
   // Référence
   eventId: ObjectId,          // Événement concerné
   bdeId: ObjectId,            // BDE concerné
-  
+
   // Statut
   isRead: Boolean,
   readAt: Date,
-  
+
   createdAt: Date
 }
 ```
 
 **Indexes** :
+
 ```javascript
 notificationSchema.index({ recipientId: 1, isRead: 1 });
 notificationSchema.index({ createdAt: -1 });
@@ -965,21 +1016,24 @@ notificationSchema.index({ eventId: 1 });
 ### Endpoints principaux
 
 #### Base URL
+
 ```
 Production: https://api.interasso.fr/api/v1
 Development: http://localhost:5000/api/v1
 ```
 
 ### Authentication
+
 ```javascript
-POST   /auth/login             // Connexion (Interasso ou BDE)
-POST   /auth/logout            // Déconnexion
-POST   /auth/refresh-token     // Refresh JWT
-GET    /auth/me                // Profil utilisateur connecté
-PUT    /auth/change-password   // Changer mot de passe
+POST / auth / login; // Connexion (Interasso ou BDE)
+POST / auth / logout; // Déconnexion
+POST / auth / refresh - token; // Refresh JWT
+GET / auth / me; // Profil utilisateur connecté
+PUT / auth / change - password; // Changer mot de passe
 ```
 
 ### BDEs
+
 ```javascript
 GET    /bdes                   // Liste des 5 BDE (public)
 GET    /bdes/:slug             // Détails d'un BDE (public)
@@ -991,6 +1045,7 @@ GET    /bdes/:id/members       // Membres d'un BDE (public)
 ### Events
 
 **Public (non authentifié)**
+
 ```javascript
 GET    /events                 // Liste événements PUBLISHED
 GET    /events/:slug           // Détails événement PUBLISHED
@@ -1001,6 +1056,7 @@ GET    /events/past            // Événements passés
 ```
 
 **Admin BDE (authentifié, role: admin_bde)**
+
 ```javascript
 POST   /events                 // Créer événement (→ status PENDING)
 GET    /events/my-bde          // Événements de mon BDE (tous status)
@@ -1009,6 +1065,7 @@ DELETE /events/:id             // Supprimer événement (si son BDE)
 ```
 
 **Admin Interasso (authentifié, role: admin_interasso)**
+
 ```javascript
 GET    /events/pending         // Tous événements PENDING
 PUT    /events/:id/validate    // Valider événement (PENDING → PUBLISHED)
@@ -1020,6 +1077,7 @@ GET    /events/all             // Tous événements (tous status)
 ### Members
 
 **Public**
+
 ```javascript
 GET    /members                // Tous membres actifs
 GET    /members?bdeId=xxx      // Membres d'un BDE
@@ -1027,6 +1085,7 @@ GET    /members/:id            // Détails membre
 ```
 
 **Admin BDE (authentifié)**
+
 ```javascript
 POST   /members                // Ajouter membre (à son BDE uniquement)
 PUT    /members/:id            // Modifier membre (de son BDE uniquement)
@@ -1037,6 +1096,7 @@ GET    /members/my-bde         // Membres de mon BDE
 ### Partners
 
 **Public**
+
 ```javascript
 GET    /partners               // Tous partenaires actifs
 GET    /partners/:slug         // Détails partenaire
@@ -1044,6 +1104,7 @@ GET    /partners?category=xxx  // Filtrer par catégorie
 ```
 
 **Admin Interasso uniquement**
+
 ```javascript
 POST   /partners               // Ajouter partenaire
 PUT    /partners/:id           // Modifier partenaire
@@ -1053,6 +1114,7 @@ DELETE /partners/:id           // Supprimer partenaire
 ### Notifications
 
 **Admin Interasso**
+
 ```javascript
 GET    /notifications          // Mes notifications
 PUT    /notifications/:id/read // Marquer comme lu
@@ -1061,6 +1123,7 @@ GET    /notifications/unread   // Nombre non lues
 ```
 
 **Admin BDE**
+
 ```javascript
 GET    /notifications          // Mes notifications (validations de mes events)
 PUT    /notifications/:id/read
@@ -1068,6 +1131,7 @@ DELETE /notifications/:id
 ```
 
 ### Upload
+
 ```javascript
 POST   /upload/image           // Upload image (auth required)
 POST   /upload/images          // Upload multiple (auth required)
@@ -1075,6 +1139,7 @@ DELETE /upload/image/:id       // Supprimer image (auth required)
 ```
 
 ### Users (Admin Interasso uniquement)
+
 ```javascript
 GET    /users                  // Liste des 5 comptes BDE
 POST   /users                  // Créer compte Admin BDE
@@ -1088,31 +1153,33 @@ PUT    /users/:id/reset-password // Réinitialiser mot de passe
 ## 🔒 Middleware de permissions
 
 ### auth.js
+
 ```javascript
 const authMiddleware = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    
+    const token = req.headers.authorization?.split(" ")[1];
+
     if (!token) {
-      return res.status(401).json({ error: 'Token manquant' });
+      return res.status(401).json({ error: "Token manquant" });
     }
-    
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded; // { id, role, bdeId }
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Token invalide' });
+    res.status(401).json({ error: "Token invalide" });
   }
 };
 ```
 
 ### permissions.js (RBAC)
+
 ```javascript
 // Vérifier si admin Interasso
 const isAdminInterasso = (req, res, next) => {
-  if (req.user.role !== 'admin_interasso') {
-    return res.status(403).json({ 
-      error: 'Accès refusé: Admin Interasso requis' 
+  if (req.user.role !== "admin_interasso") {
+    return res.status(403).json({
+      error: "Accès refusé: Admin Interasso requis",
     });
   }
   next();
@@ -1120,9 +1187,9 @@ const isAdminInterasso = (req, res, next) => {
 
 // Vérifier si admin BDE
 const isAdminBDE = (req, res, next) => {
-  if (req.user.role !== 'admin_bde') {
-    return res.status(403).json({ 
-      error: 'Accès refusé: Admin BDE requis' 
+  if (req.user.role !== "admin_bde") {
+    return res.status(403).json({
+      error: "Accès refusé: Admin BDE requis",
     });
   }
   next();
@@ -1130,9 +1197,9 @@ const isAdminBDE = (req, res, next) => {
 
 // Vérifier si admin Interasso OU admin BDE
 const isAdmin = (req, res, next) => {
-  if (!['admin_interasso', 'admin_bde'].includes(req.user.role)) {
-    return res.status(403).json({ 
-      error: 'Accès refusé: Administrateur requis' 
+  if (!["admin_interasso", "admin_bde"].includes(req.user.role)) {
+    return res.status(403).json({
+      error: "Accès refusé: Administrateur requis",
     });
   }
   next();
@@ -1141,53 +1208,79 @@ const isAdmin = (req, res, next) => {
 // Vérifier si l'événement appartient au BDE de l'user
 const canEditEvent = async (req, res, next) => {
   const event = await Event.findById(req.params.id);
-  
+
   if (!event) {
-    return res.status(404).json({ error: 'Événement non trouvé' });
+    return res.status(404).json({ error: "Événement non trouvé" });
   }
-  
+
   // Admin Interasso peut tout modifier
-  if (req.user.role === 'admin_interasso') {
+  if (req.user.role === "admin_interasso") {
     return next();
   }
-  
+
   // Admin BDE peut modifier uniquement ses événements PENDING
-  if (req.user.role === 'admin_bde') {
+  if (req.user.role === "admin_bde") {
     if (event.bdeId.toString() !== req.user.bdeId.toString()) {
-      return res.status(403).json({ 
-        error: 'Vous ne pouvez modifier que les événements de votre BDE' 
+      return res.status(403).json({
+        error: "Vous ne pouvez modifier que les événements de votre BDE",
       });
     }
-    
-    if (event.status !== 'PENDING') {
-      return res.status(403).json({ 
-        error: 'Vous ne pouvez modifier que les événements en attente' 
+
+    if (event.status !== "PENDING") {
+      return res.status(403).json({
+        error: "Vous ne pouvez modifier que les événements en attente",
       });
     }
   }
-  
+
   next();
 };
 ```
 
 ### Utilisation dans les routes
+
 ```javascript
 // routes/events.js
-import { authMiddleware, isAdminInterasso, isAdminBDE, canEditEvent } from '../middleware/permissions.js';
+import {
+  authMiddleware,
+  isAdminInterasso,
+  isAdminBDE,
+  canEditEvent,
+} from "../middleware/permissions.js";
 
 // Public
-router.get('/', eventController.getPublishedEvents);
-router.get('/:slug', eventController.getEventBySlug);
+router.get("/", eventController.getPublishedEvents);
+router.get("/:slug", eventController.getEventBySlug);
 
 // Admin BDE
-router.post('/', authMiddleware, isAdminBDE, eventController.createEvent);
-router.put('/:id', authMiddleware, canEditEvent, eventController.updateEvent);
-router.delete('/:id', authMiddleware, canEditEvent, eventController.deleteEvent);
+router.post("/", authMiddleware, isAdminBDE, eventController.createEvent);
+router.put("/:id", authMiddleware, canEditEvent, eventController.updateEvent);
+router.delete(
+  "/:id",
+  authMiddleware,
+  canEditEvent,
+  eventController.deleteEvent
+);
 
 // Admin Interasso
-router.get('/pending', authMiddleware, isAdminInterasso, eventController.getPendingEvents);
-router.put('/:id/validate', authMiddleware, isAdminInterasso, eventController.validateEvent);
-router.put('/:id/reject', authMiddleware, isAdminInterasso, eventController.rejectEvent);
+router.get(
+  "/pending",
+  authMiddleware,
+  isAdminInterasso,
+  eventController.getPendingEvents
+);
+router.put(
+  "/:id/validate",
+  authMiddleware,
+  isAdminInterasso,
+  eventController.validateEvent
+);
+router.put(
+  "/:id/reject",
+  authMiddleware,
+  isAdminInterasso,
+  eventController.rejectEvent
+);
 ```
 
 ---
@@ -1195,65 +1288,66 @@ router.put('/:id/reject', authMiddleware, isAdminInterasso, eventController.reje
 ## 📧 Système de notifications
 
 ### Service de notifications
+
 ```javascript
 // services/notificationService.js
-import Notification from '../models/Notification.js';
-import emailService from './emailService.js';
+import Notification from "../models/Notification.js";
+import emailService from "./emailService.js";
 
 class NotificationService {
   // Nouvelle soumission d'événement
   async notifyEventSubmitted(event, adminInterassoId) {
     // Créer notification in-app
     const notification = await Notification.create({
-      type: 'EVENT_SUBMITTED',
-      title: 'Nouvel événement à valider',
+      type: "EVENT_SUBMITTED",
+      title: "Nouvel événement à valider",
       message: `${event.title} soumis par ${event.bdeId.name}`,
       recipientId: adminInterassoId,
-      recipientRole: 'admin_interasso',
+      recipientRole: "admin_interasso",
       eventId: event._id,
       bdeId: event.bdeId,
-      isRead: false
+      isRead: false,
     });
-    
+
     // Envoyer email
     await emailService.sendEventSubmittedEmail(event, adminInterassoId);
-    
+
     return notification;
   }
-  
+
   // Événement validé
   async notifyEventValidated(event, adminBDEId) {
     const notification = await Notification.create({
-      type: 'EVENT_VALIDATED',
-      title: 'Événement validé ✅',
+      type: "EVENT_VALIDATED",
+      title: "Événement validé ✅",
       message: `Votre événement "${event.title}" a été publié !`,
       recipientId: adminBDEId,
-      recipientRole: 'admin_bde',
+      recipientRole: "admin_bde",
       eventId: event._id,
       bdeId: event.bdeId,
-      isRead: false
+      isRead: false,
     });
-    
+
     await emailService.sendEventValidatedEmail(event, adminBDEId);
-    
+
     return notification;
   }
-  
+
   // Événement refusé
   async notifyEventRejected(event, adminBDEId, reason) {
     const notification = await Notification.create({
-      type: 'EVENT_REJECTED',
-      title: 'Événement refusé ❌',
+      type: "EVENT_REJECTED",
+      title: "Événement refusé ❌",
       message: `Votre événement "${event.title}" a été refusé. Raison: ${reason}`,
       recipientId: adminBDEId,
-      recipientRole: 'admin_bde',
+      recipientRole: "admin_bde",
       eventId: event._id,
       bdeId: event.bdeId,
-      isRead: false
+      isRead: false,
     });
-    
+
     await emailService.sendEventRejectedEmail(event, adminBDEId, reason);
-    
+
     return notification;
   }
 }
@@ -1262,38 +1356,41 @@ export default new NotificationService();
 ```
 
 ### Controllers de validation
+
 ```javascript
 // controllers/validationController.js
-import Event from '../models/Event.js';
-import notificationService from '../services/notificationService.js';
+import Event from "../models/Event.js";
+import notificationService from "../services/notificationService.js";
 
 // Valider un événement
 export const validateEvent = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id).populate('bdeId createdBy');
-    
+    const event = await Event.findById(req.params.id).populate(
+      "bdeId createdBy"
+    );
+
     if (!event) {
-      return res.status(404).json({ error: 'Événement non trouvé' });
+      return res.status(404).json({ error: "Événement non trouvé" });
     }
-    
-    if (event.status !== 'PENDING') {
-      return res.status(400).json({ 
-        error: 'Seuls les événements en attente peuvent être validés' 
+
+    if (event.status !== "PENDING") {
+      return res.status(400).json({
+        error: "Seuls les événements en attente peuvent être validés",
       });
     }
-    
+
     // Mettre à jour le statut
-    event.status = 'PUBLISHED';
+    event.status = "PUBLISHED";
     event.publishedAt = new Date();
     event.publishedBy = req.user.id;
     await event.save();
-    
+
     // Envoyer notification au BDE
     await notificationService.notifyEventValidated(event, event.createdBy._id);
-    
+
     res.json({
-      message: 'Événement validé et publié',
-      event
+      message: "Événement validé et publié",
+      event,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -1304,42 +1401,44 @@ export const validateEvent = async (req, res) => {
 export const rejectEvent = async (req, res) => {
   try {
     const { rejectionReason } = req.body;
-    
+
     if (!rejectionReason) {
-      return res.status(400).json({ 
-        error: 'La raison du refus est requise' 
+      return res.status(400).json({
+        error: "La raison du refus est requise",
       });
     }
-    
-    const event = await Event.findById(req.params.id).populate('bdeId createdBy');
-    
+
+    const event = await Event.findById(req.params.id).populate(
+      "bdeId createdBy"
+    );
+
     if (!event) {
-      return res.status(404).json({ error: 'Événement non trouvé' });
+      return res.status(404).json({ error: "Événement non trouvé" });
     }
-    
-    if (event.status !== 'PENDING') {
-      return res.status(400).json({ 
-        error: 'Seuls les événements en attente peuvent être refusés' 
+
+    if (event.status !== "PENDING") {
+      return res.status(400).json({
+        error: "Seuls les événements en attente peuvent être refusés",
       });
     }
-    
+
     // Mettre à jour le statut
-    event.status = 'REJECTED';
+    event.status = "REJECTED";
     event.rejectionReason = rejectionReason;
     event.rejectedAt = new Date();
     event.rejectedBy = req.user.id;
     await event.save();
-    
+
     // Envoyer notification au BDE
     await notificationService.notifyEventRejected(
-      event, 
-      event.createdBy._id, 
+      event,
+      event.createdBy._id,
       rejectionReason
     );
-    
+
     res.json({
-      message: 'Événement refusé',
-      event
+      message: "Événement refusé",
+      event,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -1354,52 +1453,55 @@ export const rejectEvent = async (req, res) => {
 ### Identité visuelle Interasso
 
 #### Couleurs principales
+
 ```css
 :root {
   /* Interasso - Neutre et moderne */
-  --interasso-primary: #2563EB;      /* Bleu principal */
-  --interasso-secondary: #3B82F6;
-  --interasso-dark: #1E293B;
-  --interasso-light: #F8FAFC;
-  
+  --interasso-primary: #2563eb; /* Bleu principal */
+  --interasso-secondary: #3b82f6;
+  --interasso-dark: #1e293b;
+  --interasso-light: #f8fafc;
+
   /* BDE MMI - Violet (Emmi Wave) */
-  --mmi-primary: #8B3FBF;
-  --mmi-secondary: #A855F7;
-  
+  --mmi-primary: #8b3fbf;
+  --mmi-secondary: #a855f7;
+
   /* BDE 2 - À définir */
-  --bde2-primary: #10B981;
-  --bde2-secondary: #34D399;
-  
+  --bde2-primary: #10b981;
+  --bde2-secondary: #34d399;
+
   /* BDE 3 - À définir */
-  --bde3-primary: #F59E0B;
-  --bde3-secondary: #FBBF24;
-  
+  --bde3-primary: #f59e0b;
+  --bde3-secondary: #fbbf24;
+
   /* BDE 4 - À définir */
-  --bde4-primary: #EF4444;
-  --bde4-secondary: #F87171;
-  
+  --bde4-primary: #ef4444;
+  --bde4-secondary: #f87171;
+
   /* BDE 5 - À définir */
-  --bde5-primary: #8B5CF6;
-  --bde5-secondary: #A78BFA;
-  
+  --bde5-primary: #8b5cf6;
+  --bde5-secondary: #a78bfa;
+
   /* Couleurs communes */
-  --gray-100: #F3F4F6;
-  --gray-800: #1F2937;
-  --white: #FFFFFF;
+  --gray-100: #f3f4f6;
+  --gray-800: #1f2937;
+  --white: #ffffff;
 }
 ```
 
 ### Pages spécifiques BDE
+
 Chaque page BDE utilise dynamiquement les couleurs du BDE :
+
 ```jsx
 // Example: BDEPage.jsx
 const BDEPage = ({ bde }) => {
   return (
-    <div 
+    <div
       className="bde-page"
       style={{
-        '--bde-primary': bde.colors.primary,
-        '--bde-secondary': bde.colors.secondary
+        "--bde-primary": bde.colors.primary,
+        "--bde-secondary": bde.colors.secondary,
       }}
     >
       {/* Les composants utilisent var(--bde-primary) */}
@@ -1415,6 +1517,7 @@ const BDEPage = ({ bde }) => {
 ### Phase 1 : Setup & Core (Semaines 1-2)
 
 #### Semaine 1
+
 - [x] Initialiser repos Git
 - [x] Configuration Tailwind + Magic UI
 - [x] Setup backend Express + MongoDB
@@ -1422,6 +1525,7 @@ const BDEPage = ({ bde }) => {
 - [ ] Système d'authentification JWT avec rôles
 
 #### Semaine 2
+
 - [ ] Middleware de permissions (RBAC)
 - [ ] API CRUD BDE
 - [ ] API CRUD événements avec validation
@@ -1431,6 +1535,7 @@ const BDEPage = ({ bde }) => {
 ### Phase 2 : Pages publiques (Semaines 3-4)
 
 #### Semaine 3
+
 - [ ] Page d'accueil Interasso
   - Hero section
   - Grille des 5 BDE
@@ -1440,6 +1545,7 @@ const BDEPage = ({ bde }) => {
 - [ ] Page individuelle BDE
 
 #### Semaine 4
+
 - [ ] Page événements (avec filtres)
 - [ ] Page détails événement
 - [ ] Page partenaires
@@ -1448,6 +1554,7 @@ const BDEPage = ({ bde }) => {
 ### Phase 3 : Dashboards (Semaines 5-6)
 
 #### Semaine 5
+
 - [ ] Dashboard Admin Interasso
   - Vue d'ensemble
   - Validation événements
@@ -1456,6 +1563,7 @@ const BDEPage = ({ bde }) => {
   - Gestion utilisateurs
 
 #### Semaine 6
+
 - [ ] Dashboard Admin BDE
   - Vue d'ensemble
   - Gestion événements
@@ -1486,26 +1594,29 @@ const BDEPage = ({ bde }) => {
 ### Données initiales à créer
 
 #### Les 5 BDE
+
 ```javascript
 // Seed database
 const bdes = [
   {
-    name: 'BDE MMI',
-    slug: 'emmi-wave',
-    fullName: 'BDE MMI - Emmi Wave',
-    description: 'Le BDE des étudiants en Métiers du Multimédia et de l\'Internet',
+    name: "BDE MMI",
+    slug: "emmi-wave",
+    fullName: "BDE MMI - Emmi Wave",
+    description:
+      "Le BDE des étudiants en Métiers du Multimédia et de l'Internet",
     colors: {
-      primary: '#8B3FBF',
-      secondary: '#A855F7'
+      primary: "#8B3FBF",
+      secondary: "#A855F7",
     },
     isActive: true,
-    displayOrder: 1
+    displayOrder: 1,
   },
   // ... 4 autres BDE à définir
 ];
 ```
 
 #### Compte Admin Interasso
+
 ```javascript
 {
   username: 'admin_interasso',
@@ -1517,6 +1628,7 @@ const bdes = [
 ```
 
 #### 5 comptes Admin BDE
+
 ```javascript
 {
   username: 'admin_bde_mmi',

@@ -27,6 +27,7 @@
 ### Étape 3 : Configuration de sécurité (3 min)
 
 #### A. Créer un utilisateur de base de données
+
 1. Dans le menu de gauche : **Database Access**
 2. Cliquer sur **"Add New Database User"**
 3. Remplir :
@@ -36,6 +37,7 @@
 4. Cliquer sur **"Add User"**
 
 #### B. Autoriser les connexions
+
 1. Dans le menu de gauche : **Network Access**
 2. Cliquer sur **"Add IP Address"**
 3. Sélectionner **"Allow Access from Anywhere"** (pour le développement)
@@ -60,6 +62,7 @@ mongodb+srv://interasso_admin:<password>@cluster0.xxxxx.mongodb.net/?retryWrites
 7. **Ajouter le nom de la base de données** : `interasso`
 
 Connection string finale :
+
 ```
 mongodb+srv://interasso_admin:VOTRE_MOT_DE_PASSE@cluster0.xxxxx.mongodb.net/interasso?retryWrites=true&w=majority
 ```
@@ -86,6 +89,7 @@ MONGODB_URI=mongodb+srv://interasso_admin:VOTRE_MOT_DE_PASSE@cluster0.xxxxx.mong
 
 1. Après inscription, vous êtes sur le **Dashboard**
 2. Vous voyez vos credentials :
+
    ```
    Cloud name:    xxxxxxxx
    API Key:       xxxxxxxxxxxxxxx
@@ -128,6 +132,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
 Exécuter **2 fois** pour obtenir 2 clés différentes :
+
 - 1ère clé → `JWT_SECRET`
 - 2ème clé → `JWT_REFRESH_SECRET`
 
@@ -154,7 +159,7 @@ Créer le fichier `backend/.env` avec :
 # Server Configuration
 NODE_ENV=development
 PORT=5000
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:5000
 
 # Database MongoDB Atlas
 MONGODB_URI=mongodb+srv://interasso_admin:VOTRE_MOT_DE_PASSE@cluster0.xxxxx.mongodb.net/interasso?retryWrites=true&w=majority
@@ -191,6 +196,7 @@ npm run dev
 ```
 
 Vous devriez voir :
+
 ```
 ✅ MongoDB connecté: cluster0-xxxxx.mongodb.net
 📊 Base de données: interasso
@@ -202,28 +208,29 @@ Vous devriez voir :
 Créer un fichier test `backend/test-cloudinary.js` :
 
 ```javascript
-import dotenv from 'dotenv';
-import cloudinary from 'cloudinary';
+import dotenv from "dotenv";
+import cloudinary from "cloudinary";
 
 dotenv.config();
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // Test de connexion
 cloudinary.v2.api.ping((error, result) => {
   if (error) {
-    console.error('❌ Erreur Cloudinary:', error);
+    console.error("❌ Erreur Cloudinary:", error);
   } else {
-    console.log('✅ Cloudinary connecté:', result);
+    console.log("✅ Cloudinary connecté:", result);
   }
 });
 ```
 
 Exécuter :
+
 ```bash
 node test-cloudinary.js
 ```
@@ -235,20 +242,24 @@ Si tout fonctionne : `✅ Cloudinary connecté: { status: 'ok' }`
 ## 🐛 Dépannage
 
 ### Erreur MongoDB "Authentication failed"
+
 - Vérifier que le mot de passe dans la connection string est correct
 - Pas de caractères spéciaux non encodés dans le mot de passe
 - Si nécessaire, encoder les caractères spéciaux (ex: `@` → `%40`)
 
 ### Erreur MongoDB "Network timeout"
+
 - Vérifier que vous avez autorisé `0.0.0.0/0` dans Network Access
 - Attendre 1-2 minutes (propagation des règles)
 
 ### Erreur Cloudinary "Invalid credentials"
+
 - Vérifier Cloud Name, API Key, API Secret
 - Pas d'espaces avant/après dans le .env
 - Relancer le serveur après modification du .env
 
 ### Le serveur ne lit pas le .env
+
 - Vérifier que le fichier s'appelle exactement `.env` (pas `.env.txt`)
 - Vérifier qu'il est bien dans le dossier `backend/`
 - Redémarrer le terminal

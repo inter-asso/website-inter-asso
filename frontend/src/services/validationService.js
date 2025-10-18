@@ -1,9 +1,9 @@
-import api from './api';
+import api from "./api";
 
 const validationService = {
   // Récupérer les événements en attente (Admin Interasso)
   getPendingEvents: async () => {
-    const response = await api.get('/validation/pending-events');
+    const response = await api.get("/validation/pending-events");
     return response.data.events || response.data;
   },
 
@@ -30,7 +30,7 @@ const validationService = {
 
   // Récupérer les statistiques de validation (Admin Interasso)
   getValidationStats: async () => {
-    const response = await api.get('/validation/stats');
+    const response = await api.get("/validation/stats");
     return response.data;
   },
 };

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import validationService from '../../services/validationService';
-import { formatDate, formatTime } from '../../utils/dateUtils';
-import { EVENT_STATUS } from '../../utils/constants';
+import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import validationService from "../../services/validationService";
+import { formatDate, formatTime } from "../../utils/dateUtils";
+import { EVENT_STATUS } from "../../utils/constants";
 
 export default function ValidationDashboard() {
   const { user, logout } = useAuth();
@@ -12,31 +12,31 @@ export default function ValidationDashboard() {
   const [allEvents, setAllEvents] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('pending'); // pending, all, stats
+  const [activeTab, setActiveTab] = useState("pending"); // pending, all, stats
   const [filters, setFilters] = useState({
-    status: '',
-    bdeId: '',
+    status: "",
+    bdeId: "",
   });
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [rejectionReason, setRejectionReason] = useState('');
+  const [rejectionReason, setRejectionReason] = useState("");
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
     try {
-      if (activeTab === 'pending') {
+      if (activeTab === "pending") {
         const data = await validationService.getPendingEvents();
         setPendingEvents(data);
-      } else if (activeTab === 'all') {
+      } else if (activeTab === "all") {
         const data = await validationService.getAllEvents(filters);
         setAllEvents(data);
-      } else if (activeTab === 'stats') {
+      } else if (activeTab === "stats") {
         const data = await validationService.getValidationStats();
         setStats(data);
       }
     } catch (error) {
-      console.error('Erreur lors du chargement:', error);
+      console.error("Erreur lors du chargement:", error);
     } finally {
       setLoading(false);
     }
@@ -48,16 +48,16 @@ export default function ValidationDashboard() {
   }, [activeTab, filters]);
 
   const handleValidate = async (eventId) => {
-    if (!confirm('Êtes-vous sûr de vouloir valider cet événement ?')) return;
+    if (!confirm("Êtes-vous sûr de vouloir valider cet événement ?")) return;
 
     setActionLoading(true);
     try {
       await validationService.validateEvent(eventId);
-      alert('✅ Événement validé avec succès !');
+      alert("✅ Événement validé avec succès !");
       loadData();
     } catch (error) {
-      console.error('Erreur validation:', error);
-      alert('❌ Erreur lors de la validation');
+      console.error("Erreur validation:", error);
+      alert("❌ Erreur lors de la validation");
     } finally {
       setActionLoading(false);
     }
@@ -65,27 +65,27 @@ export default function ValidationDashboard() {
 
   const openRejectModal = (event) => {
     setSelectedEvent(event);
-    setRejectionReason('');
+    setRejectionReason("");
     setShowRejectModal(true);
   };
 
   const handleReject = async () => {
     if (!rejectionReason.trim()) {
-      alert('Veuillez indiquer une raison de rejet');
+      alert("Veuillez indiquer une raison de rejet");
       return;
     }
 
     setActionLoading(true);
     try {
       await validationService.rejectEvent(selectedEvent._id, rejectionReason);
-      alert('✅ Événement rejeté');
+      alert("✅ Événement rejeté");
       setShowRejectModal(false);
       setSelectedEvent(null);
-      setRejectionReason('');
+      setRejectionReason("");
       loadData();
     } catch (error) {
-      console.error('Erreur rejet:', error);
-      alert('❌ Erreur lors du rejet');
+      console.error("Erreur rejet:", error);
+      alert("❌ Erreur lors du rejet");
     } finally {
       setActionLoading(false);
     }
@@ -93,7 +93,7 @@ export default function ValidationDashboard() {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -103,14 +103,16 @@ export default function ValidationDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Dashboard Admin Interasso</h1>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Dashboard Admin Interasso
+              </h1>
               <p className="text-sm text-gray-600 mt-1">
                 Bienvenue, {user?.firstName} {user?.lastName}
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
                 className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-100"
               >
                 🏠 Accueil
@@ -131,31 +133,31 @@ export default function ValidationDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8">
             <button
-              onClick={() => setActiveTab('pending')}
+              onClick={() => setActiveTab("pending")}
               className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'pending'
-                  ? 'border-purple-500 text-purple-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                activeTab === "pending"
+                  ? "border-purple-500 text-purple-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               ⏳ En attente
             </button>
             <button
-              onClick={() => setActiveTab('all')}
+              onClick={() => setActiveTab("all")}
               className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'all'
-                  ? 'border-purple-500 text-purple-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                activeTab === "all"
+                  ? "border-purple-500 text-purple-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               📋 Tous les événements
             </button>
             <button
-              onClick={() => setActiveTab('stats')}
+              onClick={() => setActiveTab("stats")}
               className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'stats'
-                  ? 'border-purple-500 text-purple-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                activeTab === "stats"
+                  ? "border-purple-500 text-purple-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               📊 Statistiques
@@ -173,55 +175,73 @@ export default function ValidationDashboard() {
         ) : (
           <>
             {/* Pending Events Tab */}
-            {activeTab === 'pending' && (
+            {activeTab === "pending" && (
               <div>
                 <h2 className="text-xl font-bold text-gray-900 mb-6">
                   Événements en attente de validation ({pendingEvents.length})
                 </h2>
                 {pendingEvents.length === 0 ? (
                   <div className="text-center py-12 bg-white rounded-lg shadow">
-                    <p className="text-gray-500 text-lg">✅ Aucun événement en attente</p>
+                    <p className="text-gray-500 text-lg">
+                      ✅ Aucun événement en attente
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {pendingEvents.map((event) => (
-                      <div key={event._id} className="bg-white rounded-lg shadow p-6">
+                      <div
+                        key={event._id}
+                        className="bg-white rounded-lg shadow p-6"
+                      >
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
                             <div className="flex items-center space-x-3 mb-2">
-                              <h3 className="text-lg font-bold text-gray-900">{event.title}</h3>
+                              <h3 className="text-lg font-bold text-gray-900">
+                                {event.title}
+                              </h3>
                               <span
                                 className="px-2 py-1 text-xs font-medium rounded-full"
                                 style={{
-                                  backgroundColor: event.bdeId?.colors?.primary + '20',
+                                  backgroundColor:
+                                    event.bdeId?.colors?.primary + "20",
                                   color: event.bdeId?.colors?.primary,
                                 }}
                               >
                                 {event.bdeId?.name}
                               </span>
                             </div>
-                            <p className="text-gray-600 mb-4">{event.shortDescription || event.description}</p>
+                            <p className="text-gray-600 mb-4">
+                              {event.shortDescription || event.description}
+                            </p>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                               <div>
                                 <span className="text-gray-500">📅 Date:</span>
                                 <span className="ml-2 font-medium">
-                                  {formatDate(event.date)} à {formatTime(event.startDate)}
+                                  {formatDate(event.date)} à{" "}
+                                  {formatTime(event.startDate)}
                                 </span>
                               </div>
                               <div>
                                 <span className="text-gray-500">📍 Lieu:</span>
-                                <span className="ml-2 font-medium">{event.location}</span>
+                                <span className="ml-2 font-medium">
+                                  {event.location}
+                                </span>
                               </div>
                               <div>
                                 <span className="text-gray-500">💰 Prix:</span>
                                 <span className="ml-2 font-medium">
-                                  {event.price === 0 ? 'Gratuit' : `${event.price} €`}
+                                  {event.price === 0
+                                    ? "Gratuit"
+                                    : `${event.price} €`}
                                 </span>
                               </div>
                               <div>
-                                <span className="text-gray-500">👤 Créé par:</span>
+                                <span className="text-gray-500">
+                                  👤 Créé par:
+                                </span>
                                 <span className="ml-2 font-medium">
-                                  {event.createdBy?.firstName} {event.createdBy?.lastName}
+                                  {event.createdBy?.firstName}{" "}
+                                  {event.createdBy?.lastName}
                                 </span>
                               </div>
                             </div>
@@ -251,7 +271,7 @@ export default function ValidationDashboard() {
             )}
 
             {/* All Events Tab */}
-            {activeTab === 'all' && (
+            {activeTab === "all" && (
               <div>
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-xl font-bold text-gray-900">
@@ -260,7 +280,9 @@ export default function ValidationDashboard() {
                   <div className="flex space-x-4">
                     <select
                       value={filters.status}
-                      onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+                      onChange={(e) =>
+                        setFilters({ ...filters, status: e.target.value })
+                      }
                       className="border border-gray-300 rounded-lg px-4 py-2"
                     >
                       <option value="">Tous les statuts</option>
@@ -292,21 +314,27 @@ export default function ValidationDashboard() {
                       {allEvents.map((event) => (
                         <tr key={event._id} className="hover:bg-gray-50">
                           <td className="px-6 py-4">
-                            <div className="font-medium text-gray-900">{event.title}</div>
-                            <div className="text-sm text-gray-500">{event.location}</div>
+                            <div className="font-medium text-gray-900">
+                              {event.title}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {event.location}
+                            </div>
                           </td>
-                          <td className="px-6 py-4 text-sm text-gray-900">{event.bdeId?.name}</td>
+                          <td className="px-6 py-4 text-sm text-gray-900">
+                            {event.bdeId?.name}
+                          </td>
                           <td className="px-6 py-4 text-sm text-gray-500">
                             {formatDate(event.date)}
                           </td>
                           <td className="px-6 py-4">
                             <span
                               className={`px-2 py-1 text-xs font-medium rounded-full ${
-                                event.status === 'PUBLISHED'
-                                  ? 'bg-green-100 text-green-800'
-                                  : event.status === 'PENDING'
-                                  ? 'bg-yellow-100 text-yellow-800'
-                                  : 'bg-red-100 text-red-800'
+                                event.status === "PUBLISHED"
+                                  ? "bg-green-100 text-green-800"
+                                  : event.status === "PENDING"
+                                  ? "bg-yellow-100 text-yellow-800"
+                                  : "bg-red-100 text-red-800"
                               }`}
                             >
                               {EVENT_STATUS[event.status]?.label}
@@ -321,30 +349,42 @@ export default function ValidationDashboard() {
             )}
 
             {/* Stats Tab */}
-            {activeTab === 'stats' && stats && (
+            {activeTab === "stats" && stats && (
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-6">Statistiques de validation</h2>
-                
+                <h2 className="text-xl font-bold text-gray-900 mb-6">
+                  Statistiques de validation
+                </h2>
+
                 {/* Global Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="text-3xl mb-2">📊</div>
-                    <div className="text-2xl font-bold text-gray-900">{stats.totalEvents}</div>
-                    <div className="text-sm text-gray-600">Total événements</div>
+                    <div className="text-2xl font-bold text-gray-900">
+                      {stats.totalEvents}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Total événements
+                    </div>
                   </div>
                   <div className="bg-green-50 rounded-lg shadow p-6">
                     <div className="text-3xl mb-2">✅</div>
-                    <div className="text-2xl font-bold text-green-600">{stats.publishedEvents}</div>
+                    <div className="text-2xl font-bold text-green-600">
+                      {stats.publishedEvents}
+                    </div>
                     <div className="text-sm text-gray-600">Publiés</div>
                   </div>
                   <div className="bg-yellow-50 rounded-lg shadow p-6">
                     <div className="text-3xl mb-2">⏳</div>
-                    <div className="text-2xl font-bold text-yellow-600">{stats.pendingEvents}</div>
+                    <div className="text-2xl font-bold text-yellow-600">
+                      {stats.pendingEvents}
+                    </div>
                     <div className="text-sm text-gray-600">En attente</div>
                   </div>
                   <div className="bg-red-50 rounded-lg shadow p-6">
                     <div className="text-3xl mb-2">❌</div>
-                    <div className="text-2xl font-bold text-red-600">{stats.rejectedEvents}</div>
+                    <div className="text-2xl font-bold text-red-600">
+                      {stats.rejectedEvents}
+                    </div>
                     <div className="text-sm text-gray-600">Rejetés</div>
                   </div>
                 </div>
@@ -352,7 +392,9 @@ export default function ValidationDashboard() {
                 {/* Stats by BDE */}
                 <div className="bg-white rounded-lg shadow overflow-hidden">
                   <div className="px-6 py-4 border-b border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-900">Statistiques par BDE</h3>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      Statistiques par BDE
+                    </h3>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
@@ -377,7 +419,10 @@ export default function ValidationDashboard() {
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
                         {stats.byBDE?.map((bdeStats) => (
-                          <tr key={bdeStats.bdeId?._id} className="hover:bg-gray-50">
+                          <tr
+                            key={bdeStats.bdeId?._id}
+                            className="hover:bg-gray-50"
+                          >
                             <td className="px-6 py-4 font-medium text-gray-900">
                               {bdeStats.bdeId?.name}
                             </td>
@@ -410,7 +455,9 @@ export default function ValidationDashboard() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
             <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Rejeter l'événement</h3>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Rejeter l'événement
+              </h3>
             </div>
             <div className="px-6 py-4">
               <p className="text-sm text-gray-600 mb-4">
@@ -432,7 +479,7 @@ export default function ValidationDashboard() {
                 onClick={() => {
                   setShowRejectModal(false);
                   setSelectedEvent(null);
-                  setRejectionReason('');
+                  setRejectionReason("");
                 }}
                 disabled={actionLoading}
                 className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 disabled:opacity-50"
@@ -444,7 +491,7 @@ export default function ValidationDashboard() {
                 disabled={actionLoading || !rejectionReason.trim()}
                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {actionLoading ? 'Rejet en cours...' : 'Confirmer le rejet'}
+                {actionLoading ? "Rejet en cours..." : "Confirmer le rejet"}
               </button>
             </div>
           </div>

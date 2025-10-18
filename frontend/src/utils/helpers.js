@@ -7,12 +7,12 @@ export const slugify = (text) => {
   return text
     .toString()
     .toLowerCase()
-    .normalize('NFD') // Décomposer les caractères accentués
-    .replace(/[\u0300-\u036f]/g, '') // Supprimer les accents
-    .replace(/[^a-z0-9\s-]/g, '') // Supprimer les caractères spéciaux
+    .normalize("NFD") // Décomposer les caractères accentués
+    .replace(/[\u0300-\u036f]/g, "") // Supprimer les accents
+    .replace(/[^a-z0-9\s-]/g, "") // Supprimer les caractères spéciaux
     .trim()
-    .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
-    .replace(/-+/g, '-'); // Supprimer les tirets multiples
+    .replace(/\s+/g, "-") // Remplacer les espaces par des tirets
+    .replace(/-+/g, "-"); // Supprimer les tirets multiples
 };
 
 /**
@@ -23,7 +23,7 @@ export const slugify = (text) => {
  */
 export const truncate = (text, maxLength = 100) => {
   if (!text || text.length <= maxLength) return text;
-  return text.substring(0, maxLength).trim() + '...';
+  return text.substring(0, maxLength).trim() + "...";
 };
 
 /**
@@ -32,7 +32,7 @@ export const truncate = (text, maxLength = 100) => {
  * @returns {string} Chaîne capitalisée
  */
 export const capitalize = (str) => {
-  if (!str) return '';
+  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 
@@ -42,7 +42,7 @@ export const capitalize = (str) => {
  * @returns {string} Prix formaté
  */
 export const formatPrice = (price) => {
-  if (price === 0) return 'Gratuit';
+  if (price === 0) return "Gratuit";
   return `${price.toFixed(2)} €`;
 };
 
@@ -53,5 +53,7 @@ export const formatPrice = (price) => {
  * @returns {string} Initiales
  */
 export const getInitials = (firstName, lastName) => {
-  return `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`.toUpperCase();
+  return `${firstName?.charAt(0) || ""}${
+    lastName?.charAt(0) || ""
+  }`.toUpperCase();
 };

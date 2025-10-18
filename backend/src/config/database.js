@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
@@ -15,11 +15,11 @@ const connectDB = async () => {
 };
 
 // Handle connection events
-mongoose.connection.on('disconnected', () => {
-  console.log('⚠️  MongoDB déconnecté');
+mongoose.connection.on("disconnected", () => {
+  console.log("⚠️  MongoDB déconnecté");
 });
 
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on("error", (err) => {
   console.error(`❌ Erreur MongoDB: ${err}`);
 });
 

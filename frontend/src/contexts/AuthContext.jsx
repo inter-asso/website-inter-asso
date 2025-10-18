@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from 'react';
-import authService from '../services/authService';
+import { createContext, useState, useEffect } from "react";
+import authService from "../services/authService";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
@@ -12,22 +12,35 @@ export const AuthProvider = ({ children }) => {
   // Charger l'utilisateur au montage du composant
   useEffect(() => {
     const initAuth = async () => {
+      console.log("🔍 Initialisation de l'authentification...");
       const storedUser = authService.getStoredUser();
       const hasToken = authService.isAuthenticated();
+
+      console.log("📦 Utilisateur stocké:", storedUser);
+      console.log("🔑 Token présent:", hasToken);
 
       if (storedUser && hasToken) {
         try {
           // Vérifier que le token est toujours valide
+          console.log("✅ Vérification du token...");
           const currentUser = await authService.getCurrentUser();
+          console.log("✅ Token valide, utilisateur:", currentUser);
           setUser(currentUser);
           setIsAuthenticated(true);
         } catch (error) {
           // Token invalide, nettoyer le localStorage
-          console.error('Token invalide:', error);
-          await logout();
+          console.error("❌ Token invalide:", error);
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("user");
+          setUser(null);
+          setIsAuthenticated(false);
         }
+      } else {
+        console.log("⚠️ Pas de token ou d'utilisateur stocké");
       }
       setLoading(false);
+      console.log("✅ Initialisation terminée");
     };
 
     initAuth();
@@ -41,10 +54,10 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
       return { success: true, user: data.user };
     } catch (error) {
-      console.error('Erreur de connexion:', error);
+      console.error("Erreur de connexion:", error);
       return {
         success: false,
-        error: error.response?.data?.message || 'Erreur de connexion',
+        error: error.response?.data?.message || "Erreur de connexion",
       };
     }
   };
@@ -54,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await authService.logout();
     } catch (error) {
-      console.error('Erreur lors de la déconnexion:', error);
+      console.error("Erreur lors de la déconnexion:", error);
     } finally {
       setUser(null);
       setIsAuthenticated(false);
@@ -66,9 +79,9 @@ export const AuthProvider = ({ children }) => {
     try {
       const currentUser = await authService.getCurrentUser();
       setUser(currentUser);
-      localStorage.setItem('user', JSON.stringify(currentUser));
+      localStorage.setItem("user", JSON.stringify(currentUser));
     } catch (error) {
-      console.error('Erreur lors du rafraîchissement:', error);
+      console.error("Erreur lors du rafraîchissement:", error);
     }
   };
 
@@ -79,12 +92,12 @@ export const AuthProvider = ({ children }) => {
 
   // Vérifier si l'utilisateur est Admin Interasso
   const isAdminInterasso = () => {
-    return user?.role === 'admin_interasso';
+    return user?.role === "admin_interasso";
   };
 
   // Vérifier si l'utilisateur est Admin BDE
   const isAdminBDE = () => {
-    return user?.role === 'admin_bde';
+    return user?.role === "admin_bde";
   };
 
   const value = {

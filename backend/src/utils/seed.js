@@ -271,7 +271,7 @@ const seedEvents = async (bdes, users) => {
         slug: slugify(`Soirée ${bde.name} - Rentrée 2024`),
         description: `Grande soirée de rentrée organisée par le ${bde.name} ! Venez nombreux pour célébrer le début de l'année !`,
         shortDescription: "Soirée de rentrée à ne pas manquer !",
-        date: new Date(now.getFullYear(), 8, 15 + i, 20, 0), // Septembre  
+        date: new Date(now.getFullYear(), 8, 15 + i, 20, 0), // Septembre
         startDate: new Date(now.getFullYear(), 8, 15 + i, 20, 0), // Septembre
         endDate: new Date(now.getFullYear(), 8, 16 + i, 2, 0),
         location: "Le Viaduc - Lannion",

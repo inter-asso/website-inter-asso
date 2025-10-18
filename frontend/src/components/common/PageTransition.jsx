@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const pageVariants = {
   initial: {
@@ -10,7 +10,7 @@ const pageVariants = {
     y: 0,
     transition: {
       duration: 0.4,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
   exit: {
@@ -18,7 +18,7 @@ const pageVariants = {
     y: -20,
     transition: {
       duration: 0.3,
-      ease: 'easeIn',
+      ease: "easeIn",
     },
   },
 };

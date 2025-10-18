@@ -5,6 +5,7 @@ API RESTful pour le site du BDE Emmi Wave.
 ## 🚀 Démarrage rapide
 
 ### Prérequis
+
 - Node.js 18.x ou supérieur
 - Compte MongoDB Atlas (gratuit)
 - Compte Cloudinary (gratuit)
@@ -12,6 +13,7 @@ API RESTful pour le site du BDE Emmi Wave.
 ### Installation
 
 1. **Installer les dépendances**
+
 ```bash
 npm install
 ```
@@ -19,15 +21,17 @@ npm install
 2. **Configurer les variables d'environnement**
 
 Créer un fichier `.env` à la racine du dossier backend :
+
 ```bash
 cp .env.example .env
 ```
 
 Remplir le fichier `.env` avec vos informations :
+
 ```env
 NODE_ENV=development
 PORT=5000
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:5000
 
 # MongoDB Atlas
 MONGODB_URI=mongodb+srv://your_username:your_password@cluster.mongodb.net/bde-emmi-wave
@@ -43,6 +47,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 3. **Démarrer le serveur**
+
 ```bash
 # Mode développement (avec nodemon)
 npm run dev
@@ -99,12 +104,14 @@ backend/
 ## 📊 Modèles de données
 
 ### User (Admin)
+
 - username
 - email
 - password (hashé)
 - role (admin/moderator)
 
 ### Event
+
 - title, description
 - date, location
 - images[], coverImage
@@ -113,18 +120,21 @@ backend/
 - status (upcoming/past/cancelled)
 
 ### Partner
+
 - name, logo
 - category (restauration/culture/sport/commerce)
 - website, description
 - advantages (réductions pour adhérents)
 
 ### Member
+
 - firstName, lastName
 - role (Président, Trésorier, etc.)
 - photo, bio
 - socialLinks
 
 ### Adhesion
+
 - firstName, lastName, email
 - promotion
 - adhesionType (annuelle/semestrielle)

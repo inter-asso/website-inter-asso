@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -20,22 +20,34 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Navigation</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Accueil
                 </Link>
               </li>
               <li>
-                <Link to="/bdes" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/bdes"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Les BDE
                 </Link>
               </li>
               <li>
-                <Link to="/events" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/events"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Événements
                 </Link>
               </li>
               <li>
-                <Link to="/partners" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/partners"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Partenaires
                 </Link>
               </li>
@@ -47,17 +59,26 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Espace Admin</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/login" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/login"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Connexion
                 </Link>
               </li>
               <li>
-                <Link to="/admin/validation" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/admin/validation"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Validation (Interasso)
                 </Link>
               </li>
               <li>
-                <Link to="/admin/events" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  to="/admin/events"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Gestion (BDE)
                 </Link>
               </li>
@@ -72,7 +93,10 @@ export default function Footer() {
               <li>Rue Édouard Branly</li>
               <li>22300 Lannion</li>
               <li className="mt-3">
-                <a href="mailto:contact@interasso-lannion.fr" className="hover:text-white transition-colors">
+                <a
+                  href="mailto:contact@interasso-lannion.fr"
+                  className="hover:text-white transition-colors"
+                >
                   contact@interasso-lannion.fr
                 </a>
               </li>
@@ -82,7 +106,10 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>© {new Date().getFullYear()} InterASSO Lannion. Tous droits réservés.</p>
+          <p>
+            © {new Date().getFullYear()} InterASSO Lannion. Tous droits
+            réservés.
+          </p>
         </div>
       </div>
     </footer>

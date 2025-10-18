@@ -7,6 +7,7 @@ Site web moderne du BDE Emmi Wave permettant de présenter le BDE, gérer les ad
 ## 🚀 Technologies
 
 ### Frontend
+
 - **React** 18.x - Framework principal
 - **Tailwind CSS** 3.x - Framework CSS utilitaire
 - **Magic UI** - Bibliothèque de composants UI modernes
@@ -14,6 +15,7 @@ Site web moderne du BDE Emmi Wave permettant de présenter le BDE, gérer les ad
 - **Vite** - Build tool ultra-rapide
 
 ### Backend
+
 - **Node.js** 18.x LTS - Runtime JavaScript
 - **Express.js** 4.x - Framework web
 - **MongoDB** 6.x - Base de données NoSQL
@@ -23,21 +25,24 @@ Site web moderne du BDE Emmi Wave permettant de présenter le BDE, gérer les ad
 ## 📦 Installation
 
 ### Prérequis
+
 - Node.js 18.x ou supérieur
 - npm ou yarn
 - Compte MongoDB Atlas (gratuit)
 - Compte Cloudinary (gratuit)
 
 ### Frontend
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Le site sera accessible sur `http://localhost:5173`
+Le site sera accessible sur `http://localhost:5000`
 
 ### Backend
+
 ```bash
 cd backend
 npm install
@@ -55,7 +60,7 @@ Créer un fichier `.env` dans le dossier `backend` :
 ```env
 NODE_ENV=development
 PORT=5000
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:5000
 
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_super_secret_key

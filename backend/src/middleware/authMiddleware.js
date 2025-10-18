@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 /**
  * Middleware d'authentification JWT
@@ -9,26 +9,26 @@ export const authMiddleware = async (req, res, next) => {
   try {
     // Récupérer le token depuis le header Authorization
     const authHeader = req.headers.authorization;
-    
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
-        error: 'Token d\'authentification manquant'
+        error: "Token d'authentification manquant",
       });
     }
 
-    const token = authHeader.split(' ')[1];
+    const token = authHeader.split(" ")[1];
 
     // Vérifier le token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Récupérer l'utilisateur depuis la base de données
-    const user = await User.findById(decoded.id).select('-password');
+    const user = await User.findById(decoded.id).select("-password");
 
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: 'Utilisateur non trouvé'
+        error: "Utilisateur non trouvé",
       });
     }
 
@@ -37,29 +37,29 @@ export const authMiddleware = async (req, res, next) => {
       id: user._id,
       email: user.email,
       role: user.role,
-      bdeId: user.bdeId
+      bdeId: user.bdeId,
     };
 
     next();
   } catch (error) {
-    if (error.name === 'JsonWebTokenError') {
+    if (error.name === "JsonWebTokenError") {
       return res.status(401).json({
         success: false,
-        error: 'Token invalide'
+        error: "Token invalide",
       });
     }
-    
-    if (error.name === 'TokenExpiredError') {
+
+    if (error.name === "TokenExpiredError") {
       return res.status(401).json({
         success: false,
-        error: 'Token expiré'
+        error: "Token expiré",
       });
     }
 
     return res.status(500).json({
       success: false,
-      error: 'Erreur d\'authentification',
-      details: error.message
+      error: "Erreur d'authentification",
+      details: error.message,
     });
   }
 };
@@ -71,21 +71,21 @@ export const authMiddleware = async (req, res, next) => {
 export const optionalAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return next(); // Pas de token, on continue quand même
     }
 
-    const token = authHeader.split(' ')[1];
+    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id).select('-password');
+    const user = await User.findById(decoded.id).select("-password");
 
     if (user) {
       req.user = {
         id: user._id,
         email: user.email,
         role: user.role,
-        bdeId: user.bdeId
+        bdeId: user.bdeId,
       };
     }
 

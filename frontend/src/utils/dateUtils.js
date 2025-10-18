@@ -6,13 +6,13 @@
  */
 export const formatDate = (date, options = {}) => {
   const defaultOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
     ...options,
   };
 
-  return new Date(date).toLocaleDateString('fr-FR', defaultOptions);
+  return new Date(date).toLocaleDateString("fr-FR", defaultOptions);
 };
 
 /**
@@ -21,12 +21,12 @@ export const formatDate = (date, options = {}) => {
  * @returns {string} Date et heure formatées
  */
 export const formatDateTime = (date) => {
-  return new Date(date).toLocaleDateString('fr-FR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+  return new Date(date).toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 };
 
@@ -36,9 +36,9 @@ export const formatDateTime = (date) => {
  * @returns {string} Heure formatée
  */
 export const formatTime = (date) => {
-  return new Date(date).toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
+  return new Date(date).toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
   });
 };
 
@@ -52,11 +52,14 @@ export const getRelativeTime = (date) => {
   const then = new Date(date);
   const diffInSeconds = Math.floor((now - then) / 1000);
 
-  if (diffInSeconds < 60) return 'À l\'instant';
-  if (diffInSeconds < 3600) return `Il y a ${Math.floor(diffInSeconds / 60)} min`;
-  if (diffInSeconds < 86400) return `Il y a ${Math.floor(diffInSeconds / 3600)} h`;
-  if (diffInSeconds < 604800) return `Il y a ${Math.floor(diffInSeconds / 86400)} j`;
-  
+  if (diffInSeconds < 60) return "À l'instant";
+  if (diffInSeconds < 3600)
+    return `Il y a ${Math.floor(diffInSeconds / 60)} min`;
+  if (diffInSeconds < 86400)
+    return `Il y a ${Math.floor(diffInSeconds / 3600)} h`;
+  if (diffInSeconds < 604800)
+    return `Il y a ${Math.floor(diffInSeconds / 86400)} j`;
+
   return formatDate(date);
 };
 

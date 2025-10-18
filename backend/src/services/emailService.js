@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 class EmailService {
   constructor() {
@@ -12,24 +12,27 @@ class EmailService {
   initTransporter() {
     // Vérifier si la config email est présente
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
-      console.log('⚠️  Email non configuré - Les emails ne seront pas envoyés');
+      console.log("⚠️  Email non configuré - Les emails ne seront pas envoyés");
       return;
     }
 
     try {
       this.transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+        host: process.env.EMAIL_HOST || "smtp.gmail.com",
         port: parseInt(process.env.EMAIL_PORT) || 587,
-        secure: process.env.EMAIL_SECURE === 'true',
+        secure: process.env.EMAIL_SECURE === "true",
         auth: {
           user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASSWORD
-        }
+          pass: process.env.EMAIL_PASSWORD,
+        },
       });
 
-      console.log('✅ Service email initialisé');
+      console.log("✅ Service email initialisé");
     } catch (error) {
-      console.error('❌ Erreur lors de l\'initialisation du service email:', error);
+      console.error(
+        "❌ Erreur lors de l'initialisation du service email:",
+        error
+      );
     }
   }
 
@@ -38,7 +41,7 @@ class EmailService {
    */
   async sendEmail(to, subject, html) {
     if (!this.transporter) {
-      console.log('⚠️  Email non configuré - Email non envoyé');
+      console.log("⚠️  Email non configuré - Email non envoyé");
       return null;
     }
 
@@ -47,13 +50,13 @@ class EmailService {
         from: `"Interasso" <${process.env.EMAIL_USER}>`,
         to,
         subject,
-        html
+        html,
       });
 
       console.log(`✅ Email envoyé: ${info.messageId}`);
       return info;
     } catch (error) {
-      console.error('❌ Erreur lors de l\'envoi de l\'email:', error);
+      console.error("❌ Erreur lors de l'envoi de l'email:", error);
       throw error;
     }
   }
@@ -69,22 +72,28 @@ class EmailService {
         
         <p>Bonjour,</p>
         
-        <p>Le <strong>${bde.name}</strong> a soumis un nouvel événement qui attend votre validation :</p>
+        <p>Le <strong>${
+          bde.name
+        }</strong> a soumis un nouvel événement qui attend votre validation :</p>
         
         <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="margin-top: 0;">${event.title}</h3>
-          <p><strong>📅 Date :</strong> ${new Date(event.date).toLocaleDateString('fr-FR', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+          <p><strong>📅 Date :</strong> ${new Date(
+            event.date
+          ).toLocaleDateString("fr-FR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           })}</p>
           <p><strong>📍 Lieu :</strong> ${event.location}</p>
           <p><strong>🏷️ Catégorie :</strong> ${event.category}</p>
           <p><strong>📝 Description :</strong></p>
-          <p>${event.description.substring(0, 200)}${event.description.length > 200 ? '...' : ''}</p>
+          <p>${event.description.substring(0, 200)}${
+      event.description.length > 200 ? "..." : ""
+    }</p>
         </div>
         
         <p>Connectez-vous à votre dashboard pour valider ou refuser cet événement.</p>
@@ -122,13 +131,15 @@ class EmailService {
         
         <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10B981;">
           <h3 style="margin-top: 0; color: #10B981;">${event.title}</h3>
-          <p><strong>📅 Date :</strong> ${new Date(event.date).toLocaleDateString('fr-FR', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+          <p><strong>📅 Date :</strong> ${new Date(
+            event.date
+          ).toLocaleDateString("fr-FR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           })}</p>
           <p><strong>📍 Lieu :</strong> ${event.location}</p>
           <p><strong>✅ Statut :</strong> Publié</p>
@@ -169,13 +180,15 @@ class EmailService {
         
         <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #EF4444;">
           <h3 style="margin-top: 0; color: #EF4444;">${event.title}</h3>
-          <p><strong>📅 Date prévue :</strong> ${new Date(event.date).toLocaleDateString('fr-FR', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+          <p><strong>📅 Date prévue :</strong> ${new Date(
+            event.date
+          ).toLocaleDateString("fr-FR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           })}</p>
           <p><strong>📍 Lieu :</strong> ${event.location}</p>
         </div>

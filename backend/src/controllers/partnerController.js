@@ -1,5 +1,5 @@
-import Partner from '../models/Partner.js';
-import { logAdminAction } from '../middleware/permissions.js';
+import Partner from "../models/Partner.js";
+import { logAdminAction } from "../middleware/permissions.js";
 
 /**
  * @route   GET /api/partners
@@ -12,21 +12,20 @@ export const getPartners = async (req, res) => {
     const filter = {};
 
     if (category) filter.category = category;
-    if (featured === 'true') filter.featured = true;
+    if (featured === "true") filter.featured = true;
 
-    const partners = await Partner.find(filter)
-      .sort({ displayOrder: 1 });
+    const partners = await Partner.find(filter).sort({ displayOrder: 1 });
 
     res.json({
       success: true,
       count: partners.length,
-      partners
+      partners,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération des partenaires',
-      details: error.message
+      error: "Erreur lors de la récupération des partenaires",
+      details: error.message,
     });
   }
 };
@@ -45,19 +44,19 @@ export const getPartnerById = async (req, res) => {
     if (!partner) {
       return res.status(404).json({
         success: false,
-        error: 'Partenaire non trouvé'
+        error: "Partenaire non trouvé",
       });
     }
 
     res.json({
       success: true,
-      partner
+      partner,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la récupération du partenaire',
-      details: error.message
+      error: "Erreur lors de la récupération du partenaire",
+      details: error.message,
     });
   }
 };
@@ -69,10 +68,11 @@ export const getPartnerById = async (req, res) => {
  */
 export const createPartner = async (req, res) => {
   try {
-    if (req.user.role !== 'admin_interasso') {
+    if (req.user.role !== "admin_interasso") {
       return res.status(403).json({
         success: false,
-        error: 'Accès refusé - Seuls les administrateurs Interasso peuvent créer des partenaires'
+        error:
+          "Accès refusé - Seuls les administrateurs Interasso peuvent créer des partenaires",
       });
     }
 
@@ -82,14 +82,14 @@ export const createPartner = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Partenaire créé avec succès',
-      partner
+      message: "Partenaire créé avec succès",
+      partner,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la création du partenaire',
-      details: error.message
+      error: "Erreur lors de la création du partenaire",
+      details: error.message,
     });
   }
 };
@@ -103,10 +103,11 @@ export const updatePartner = async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (req.user.role !== 'admin_interasso') {
+    if (req.user.role !== "admin_interasso") {
       return res.status(403).json({
         success: false,
-        error: 'Accès refusé - Seuls les administrateurs Interasso peuvent modifier des partenaires'
+        error:
+          "Accès refusé - Seuls les administrateurs Interasso peuvent modifier des partenaires",
       });
     }
 
@@ -115,24 +116,24 @@ export const updatePartner = async (req, res) => {
     if (!partner) {
       return res.status(404).json({
         success: false,
-        error: 'Partenaire non trouvé'
+        error: "Partenaire non trouvé",
       });
     }
 
     // Champs modifiables
     const allowedFields = [
-      'name',
-      'description',
-      'logo',
-      'website',
-      'category',
-      'benefits',
-      'featured',
-      'displayOrder'
+      "name",
+      "description",
+      "logo",
+      "website",
+      "category",
+      "benefits",
+      "featured",
+      "displayOrder",
     ];
 
     const updates = {};
-    allowedFields.forEach(field => {
+    allowedFields.forEach((field) => {
       if (req.body[field] !== undefined) {
         updates[field] = req.body[field];
       }
@@ -141,20 +142,20 @@ export const updatePartner = async (req, res) => {
     Object.assign(partner, updates);
     await partner.save();
 
-    logAdminAction('UPDATE_PARTNER')({ user: req.user, partnerId: id });
+    logAdminAction("UPDATE_PARTNER")({ user: req.user, partnerId: id });
 
     console.log(`✏️ Partenaire modifié: ${partner.name} par ${req.user.email}`);
 
     res.json({
       success: true,
-      message: 'Partenaire modifié avec succès',
-      partner
+      message: "Partenaire modifié avec succès",
+      partner,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la modification du partenaire',
-      details: error.message
+      error: "Erreur lors de la modification du partenaire",
+      details: error.message,
     });
   }
 };
@@ -168,10 +169,11 @@ export const deletePartner = async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (req.user.role !== 'admin_interasso') {
+    if (req.user.role !== "admin_interasso") {
       return res.status(403).json({
         success: false,
-        error: 'Accès refusé - Seuls les administrateurs Interasso peuvent supprimer des partenaires'
+        error:
+          "Accès refusé - Seuls les administrateurs Interasso peuvent supprimer des partenaires",
       });
     }
 
@@ -180,25 +182,27 @@ export const deletePartner = async (req, res) => {
     if (!partner) {
       return res.status(404).json({
         success: false,
-        error: 'Partenaire non trouvé'
+        error: "Partenaire non trouvé",
       });
     }
 
     await partner.deleteOne();
 
-    logAdminAction('DELETE_PARTNER')({ user: req.user, partnerId: id });
+    logAdminAction("DELETE_PARTNER")({ user: req.user, partnerId: id });
 
-    console.log(`🗑️ Partenaire supprimé: ${partner.name} par ${req.user.email}`);
+    console.log(
+      `🗑️ Partenaire supprimé: ${partner.name} par ${req.user.email}`
+    );
 
     res.json({
       success: true,
-      message: 'Partenaire supprimé avec succès'
+      message: "Partenaire supprimé avec succès",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la suppression du partenaire',
-      details: error.message
+      error: "Erreur lors de la suppression du partenaire",
+      details: error.message,
     });
   }
 };

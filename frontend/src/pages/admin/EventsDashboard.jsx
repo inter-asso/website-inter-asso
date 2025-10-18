@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import eventService from '../../services/eventService';
-import { formatDate, formatTime } from '../../utils/dateUtils';
-import { EVENT_STATUS, EVENT_CATEGORIES } from '../../utils/constants';
+import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import eventService from "../../services/eventService";
+import { formatDate, formatTime } from "../../utils/dateUtils";
+import { EVENT_STATUS, EVENT_CATEGORIES } from "../../utils/constants";
 
 export default function EventsDashboard() {
   const { user, logout } = useAuth();
@@ -13,19 +13,19 @@ export default function EventsDashboard() {
   const [showEventForm, setShowEventForm] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    shortDescription: '',
-    date: '',
-    startDate: '',
-    endDate: '',
-    location: '',
-    address: '',
+    title: "",
+    description: "",
+    shortDescription: "",
+    date: "",
+    startDate: "",
+    endDate: "",
+    location: "",
+    address: "",
     price: 0,
-    category: 'soirée',
-    maxParticipants: '',
+    category: "soirée",
+    maxParticipants: "",
     registrationRequired: false,
-    registrationDeadline: '',
+    registrationDeadline: "",
   });
   const [submitLoading, setSubmitLoading] = useState(false);
 
@@ -39,7 +39,7 @@ export default function EventsDashboard() {
       const data = await eventService.getMyBDEEvents();
       setEvents(data);
     } catch (error) {
-      console.error('Erreur chargement événements:', error);
+      console.error("Erreur chargement événements:", error);
     } finally {
       setLoading(false);
     }
@@ -47,25 +47,25 @@ export default function EventsDashboard() {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   const openCreateForm = () => {
     setEditingEvent(null);
     setFormData({
-      title: '',
-      description: '',
-      shortDescription: '',
-      date: '',
-      startDate: '',
-      endDate: '',
-      location: '',
-      address: '',
+      title: "",
+      description: "",
+      shortDescription: "",
+      date: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+      address: "",
       price: 0,
-      category: 'soirée',
-      maxParticipants: '',
+      category: "soirée",
+      maxParticipants: "",
       registrationRequired: false,
-      registrationDeadline: '',
+      registrationDeadline: "",
     });
     setShowEventForm(true);
   };
@@ -75,19 +75,23 @@ export default function EventsDashboard() {
     setFormData({
       title: event.title,
       description: event.description,
-      shortDescription: event.shortDescription || '',
-      date: event.date ? new Date(event.date).toISOString().slice(0, 16) : '',
-      startDate: event.startDate ? new Date(event.startDate).toISOString().slice(0, 16) : '',
-      endDate: event.endDate ? new Date(event.endDate).toISOString().slice(0, 16) : '',
+      shortDescription: event.shortDescription || "",
+      date: event.date ? new Date(event.date).toISOString().slice(0, 16) : "",
+      startDate: event.startDate
+        ? new Date(event.startDate).toISOString().slice(0, 16)
+        : "",
+      endDate: event.endDate
+        ? new Date(event.endDate).toISOString().slice(0, 16)
+        : "",
       location: event.location,
-      address: event.address || '',
+      address: event.address || "",
       price: event.price,
       category: event.category,
-      maxParticipants: event.maxParticipants || '',
+      maxParticipants: event.maxParticipants || "",
       registrationRequired: event.registrationRequired || false,
       registrationDeadline: event.registrationDeadline
         ? new Date(event.registrationDeadline).toISOString().slice(0, 10)
-        : '',
+        : "",
     });
     setShowEventForm(true);
   };
@@ -100,37 +104,39 @@ export default function EventsDashboard() {
       const eventData = {
         ...formData,
         price: parseFloat(formData.price),
-        maxParticipants: formData.maxParticipants ? parseInt(formData.maxParticipants) : undefined,
+        maxParticipants: formData.maxParticipants
+          ? parseInt(formData.maxParticipants)
+          : undefined,
       };
 
       if (editingEvent) {
         await eventService.updateEvent(editingEvent._id, eventData);
-        alert('✅ Événement modifié avec succès !');
+        alert("✅ Événement modifié avec succès !");
       } else {
         await eventService.createEvent(eventData);
-        alert('✅ Événement créé et soumis pour validation !');
+        alert("✅ Événement créé et soumis pour validation !");
       }
 
       setShowEventForm(false);
       loadEvents();
     } catch (error) {
-      console.error('Erreur soumission:', error);
-      alert('❌ Erreur lors de la soumission');
+      console.error("Erreur soumission:", error);
+      alert("❌ Erreur lors de la soumission");
     } finally {
       setSubmitLoading(false);
     }
   };
 
   const handleDelete = async (eventId) => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) return;
+    if (!confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) return;
 
     try {
       await eventService.deleteEvent(eventId);
-      alert('✅ Événement supprimé');
+      alert("✅ Événement supprimé");
       loadEvents();
     } catch (error) {
-      console.error('Erreur suppression:', error);
-      alert('❌ Erreur lors de la suppression');
+      console.error("Erreur suppression:", error);
+      alert("❌ Erreur lors de la suppression");
     }
   };
 
@@ -150,7 +156,7 @@ export default function EventsDashboard() {
             </div>
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
                 className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-100"
               >
                 🏠 Accueil
@@ -170,7 +176,9 @@ export default function EventsDashboard() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Actions Bar */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-gray-900">Mes événements ({events.length})</h2>
+          <h2 className="text-xl font-bold text-gray-900">
+            Mes événements ({events.length})
+          </h2>
           <button
             onClick={openCreateForm}
             className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 font-medium"
@@ -201,14 +209,16 @@ export default function EventsDashboard() {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-lg font-bold text-gray-900">{event.title}</h3>
+                      <h3 className="text-lg font-bold text-gray-900">
+                        {event.title}
+                      </h3>
                       <span
                         className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          event.status === 'PUBLISHED'
-                            ? 'bg-green-100 text-green-800'
-                            : event.status === 'PENDING'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : 'bg-red-100 text-red-800'
+                          event.status === "PUBLISHED"
+                            ? "bg-green-100 text-green-800"
+                            : event.status === "PENDING"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
                         }`}
                       >
                         {EVENT_STATUS[event.status]?.label}
@@ -217,34 +227,43 @@ export default function EventsDashboard() {
                         {EVENT_CATEGORIES[event.category]?.label}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4">{event.shortDescription || event.description}</p>
+                    <p className="text-gray-600 mb-4">
+                      {event.shortDescription || event.description}
+                    </p>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <span className="text-gray-500">📅 Date:</span>
                         <span className="ml-2 font-medium">
-                          {formatDate(event.date)} à {formatTime(event.startDate)}
+                          {formatDate(event.date)} à{" "}
+                          {formatTime(event.startDate)}
                         </span>
                       </div>
                       <div>
                         <span className="text-gray-500">📍 Lieu:</span>
-                        <span className="ml-2 font-medium">{event.location}</span>
+                        <span className="ml-2 font-medium">
+                          {event.location}
+                        </span>
                       </div>
                       <div>
                         <span className="text-gray-500">💰 Prix:</span>
                         <span className="ml-2 font-medium">
-                          {event.price === 0 ? 'Gratuit' : `${event.price} €`}
+                          {event.price === 0 ? "Gratuit" : `${event.price} €`}
                         </span>
                       </div>
-                      {event.status === 'REJECTED' && event.rejectionReason && (
+                      {event.status === "REJECTED" && event.rejectionReason && (
                         <div className="col-span-2">
-                          <span className="text-red-500">❌ Raison du rejet:</span>
-                          <span className="ml-2 text-red-600 font-medium">{event.rejectionReason}</span>
+                          <span className="text-red-500">
+                            ❌ Raison du rejet:
+                          </span>
+                          <span className="ml-2 text-red-600 font-medium">
+                            {event.rejectionReason}
+                          </span>
                         </div>
                       )}
                     </div>
                   </div>
                   <div className="flex flex-col space-y-2 ml-6">
-                    {event.status === 'PENDING' && (
+                    {event.status === "PENDING" && (
                       <button
                         onClick={() => openEditForm(event)}
                         className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 whitespace-nowrap"
@@ -272,60 +291,90 @@ export default function EventsDashboard() {
           <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 my-8">
             <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">
-                {editingEvent ? 'Modifier l\'événement' : 'Nouvel événement'}
+                {editingEvent ? "Modifier l'événement" : "Nouvel événement"}
               </h3>
             </div>
-            <form onSubmit={handleSubmit} className="px-6 py-4 space-y-4 max-h-[70vh] overflow-y-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="px-6 py-4 space-y-4 max-h-[70vh] overflow-y-auto"
+            >
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Titre *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Titre *
+                </label>
                 <input
                   type="text"
                   required
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description courte</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description courte
+                </label>
                 <input
                   type="text"
                   value={formData.shortDescription}
-                  onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      shortDescription: e.target.value,
+                    })
+                  }
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   placeholder="Résumé en une ligne"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description complète *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description complète *
+                </label>
                 <textarea
                   required
                   rows="4"
                   value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Date *
+                  </label>
                   <input
                     type="datetime-local"
                     required
                     value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value, startDate: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        date: e.target.value,
+                        startDate: e.target.value,
+                      })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Fin</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Fin
+                  </label>
                   <input
                     type="datetime-local"
                     value={formData.endDate}
-                    onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, endDate: e.target.value })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
@@ -333,21 +382,29 @@ export default function EventsDashboard() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Lieu *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Lieu *
+                  </label>
                   <input
                     type="text"
                     required
                     value={formData.location}
-                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, location: e.target.value })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Adresse
+                  </label>
                   <input
                     type="text"
                     value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, address: e.target.value })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
@@ -355,23 +412,31 @@ export default function EventsDashboard() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Prix (€) *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Prix (€) *
+                  </label>
                   <input
                     type="number"
                     min="0"
                     step="0.01"
                     required
                     value={formData.price}
-                    onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, price: e.target.value })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Catégorie *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Catégorie *
+                  </label>
                   <select
                     required
                     value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, category: e.target.value })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     {Object.entries(EVENT_CATEGORIES).map(([key, value]) => (
@@ -389,11 +454,17 @@ export default function EventsDashboard() {
                   id="registration"
                   checked={formData.registrationRequired}
                   onChange={(e) =>
-                    setFormData({ ...formData, registrationRequired: e.target.checked })
+                    setFormData({
+                      ...formData,
+                      registrationRequired: e.target.checked,
+                    })
                   }
                   className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
                 />
-                <label htmlFor="registration" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="registration"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Inscription requise
                 </label>
               </div>
@@ -408,7 +479,12 @@ export default function EventsDashboard() {
                       type="number"
                       min="1"
                       value={formData.maxParticipants}
-                      onChange={(e) => setFormData({ ...formData, maxParticipants: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          maxParticipants: e.target.value,
+                        })
+                      }
                       className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     />
                   </div>
@@ -420,7 +496,10 @@ export default function EventsDashboard() {
                       type="date"
                       value={formData.registrationDeadline}
                       onChange={(e) =>
-                        setFormData({ ...formData, registrationDeadline: e.target.value })
+                        setFormData({
+                          ...formData,
+                          registrationDeadline: e.target.value,
+                        })
                       }
                       className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     />
@@ -443,10 +522,10 @@ export default function EventsDashboard() {
                 className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitLoading
-                  ? 'Enregistrement...'
+                  ? "Enregistrement..."
                   : editingEvent
-                  ? 'Modifier'
-                  : 'Créer et soumettre'}
+                  ? "Modifier"
+                  : "Créer et soumettre"}
               </button>
             </div>
           </div>

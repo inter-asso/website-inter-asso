@@ -1,6 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -9,7 +9,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -50,7 +50,11 @@ export default function Navbar() {
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 <Link
-                  to={user?.role === 'admin_interasso' ? '/admin/validation' : '/admin/events'}
+                  to={
+                    user?.role === "admin_interasso"
+                      ? "/admin/validation"
+                      : "/admin/events"
+                  }
                   className="text-purple-600 hover:text-purple-700 px-3 py-2 text-sm font-medium"
                 >
                   📊 Dashboard
@@ -139,7 +143,11 @@ export default function Navbar() {
               <>
                 <div className="border-t border-gray-200 my-2"></div>
                 <Link
-                  to={user?.role === 'admin_interasso' ? '/admin/validation' : '/admin/events'}
+                  to={
+                    user?.role === "admin_interasso"
+                      ? "/admin/validation"
+                      : "/admin/events"
+                  }
                   className="block px-3 py-2 text-base font-medium text-purple-600 hover:bg-gray-50 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >

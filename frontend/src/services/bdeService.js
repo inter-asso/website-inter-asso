@@ -1,9 +1,9 @@
-import api from './api';
+import api from "./api";
 
 const bdeService = {
   // Récupérer tous les BDE
   getAllBDEs: async () => {
-    const response = await api.get('/bdes');
+    const response = await api.get("/bdes");
     return response.data.bdes || response.data;
   },
 
@@ -34,7 +34,7 @@ const bdeService = {
 
   // Créer un BDE (Admin Interasso uniquement)
   createBDE: async (bdeData) => {
-    const response = await api.post('/bdes', bdeData);
+    const response = await api.post("/bdes", bdeData);
     return response.data;
   },
 

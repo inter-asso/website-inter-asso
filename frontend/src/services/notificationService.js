@@ -1,15 +1,15 @@
-import api from './api';
+import api from "./api";
 
 const notificationService = {
   // Récupérer toutes les notifications
   getNotifications: async () => {
-    const response = await api.get('/notifications');
+    const response = await api.get("/notifications");
     return response.data;
   },
 
   // Récupérer le nombre de notifications non lues
   getUnreadCount: async () => {
-    const response = await api.get('/notifications/unread-count');
+    const response = await api.get("/notifications/unread-count");
     return response.data;
   },
 
@@ -21,7 +21,7 @@ const notificationService = {
 
   // Marquer toutes les notifications comme lues
   markAllAsRead: async () => {
-    const response = await api.put('/notifications/mark-all-read');
+    const response = await api.put("/notifications/mark-all-read");
     return response.data;
   },
 
@@ -33,7 +33,7 @@ const notificationService = {
 
   // Supprimer toutes les notifications lues
   deleteReadNotifications: async () => {
-    const response = await api.delete('/notifications/read');
+    const response = await api.delete("/notifications/read");
     return response.data;
   },
 };
