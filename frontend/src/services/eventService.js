@@ -10,7 +10,7 @@ const eventService = {
       }
       return acc;
     }, {});
-    
+
     console.log("📤 Envoi des filtres:", cleanFilters);
     const params = new URLSearchParams(cleanFilters);
     console.log("🔗 URL params:", params.toString());

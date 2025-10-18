@@ -11,8 +11,13 @@ import { logAdminAction } from "../middleware/permissions.js";
 export const getEvents = async (req, res) => {
   try {
     const { bdeId, category, upcoming } = req.query;
-    
-    console.log("📥 Filtres reçus:", { bdeId, category, upcoming, type: typeof upcoming });
+
+    console.log("📥 Filtres reçus:", {
+      bdeId,
+      category,
+      upcoming,
+      type: typeof upcoming,
+    });
 
     const filter = { status: "PUBLISHED" };
 
@@ -24,7 +29,7 @@ export const getEvents = async (req, res) => {
       filter.date = { $gte: new Date() };
       console.log("🔍 Filtre date appliqué: événements >= ", new Date());
     }
-    
+
     console.log("🔎 Filtre MongoDB final:", filter);
 
     const events = await Event.find(filter)
