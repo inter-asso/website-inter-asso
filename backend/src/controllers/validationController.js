@@ -291,19 +291,25 @@ export const getValidationStats = async (req, res) => {
       select: "name slug logo",
     });
 
+    // Reformater pour correspondre au format attendu par le frontend
+    const formattedBdeStats = bdeStats.map((stat) => ({
+      bdeId: stat._id,
+      total: stat.total,
+      pending: stat.pending,
+      published: stat.published,
+      rejected: stat.rejected,
+    }));
+
     res.json({
       success: true,
-      stats: {
-        global: {
-          pending,
-          published,
-          rejected,
-          total: pending + published + rejected,
-        },
-        byBDE: bdeStats,
-      },
+      totalEvents: pending + published + rejected,
+      pendingEvents: pending,
+      publishedEvents: published,
+      rejectedEvents: rejected,
+      byBDE: formattedBdeStats,
     });
   } catch (error) {
+    console.error("❌ Erreur récupération stats:", error);
     res.status(500).json({
       success: false,
       error: "Erreur lors de la récupération des statistiques",

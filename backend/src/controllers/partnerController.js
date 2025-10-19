@@ -1,5 +1,4 @@
 import Partner from "../models/Partner.js";
-import { logAdminAction } from "../middleware/permissions.js";
 
 /**
  * @route   GET /api/partners
@@ -76,6 +75,11 @@ export const createPartner = async (req, res) => {
       });
     }
 
+    console.log(
+      "📥 Données reçues pour création partenaire:",
+      JSON.stringify(req.body, null, 2)
+    );
+
     const partner = await Partner.create(req.body);
 
     console.log(`✨ Nouveau partenaire créé: ${partner.name}`);
@@ -86,6 +90,7 @@ export const createPartner = async (req, res) => {
       partner,
     });
   } catch (error) {
+    console.error("❌ Erreur création partenaire:", error);
     res.status(500).json({
       success: false,
       error: "Erreur lors de la création du partenaire",
@@ -95,7 +100,7 @@ export const createPartner = async (req, res) => {
 };
 
 /**
- * @route   PUT /api/partners/:id
+ * @route   GET /api/partners/:id
  * @desc    Modifier un partenaire
  * @access  Private - Admin Interasso uniquement
  */
@@ -127,8 +132,12 @@ export const updatePartner = async (req, res) => {
       "logo",
       "website",
       "category",
-      "benefits",
-      "featured",
+      "advantages",
+      "contactEmail",
+      "contactPhone",
+      "address",
+      "socialLinks",
+      "isActive",
       "displayOrder",
     ];
 
@@ -142,7 +151,9 @@ export const updatePartner = async (req, res) => {
     Object.assign(partner, updates);
     await partner.save();
 
-    logAdminAction("UPDATE_PARTNER")({ user: req.user, partnerId: id });
+    console.log(
+      `[ADMIN ACTION] UPDATE_PARTNER by ${req.user.email} (${req.user.role}) - Partner: ${partner.name}`
+    );
 
     console.log(`✏️ Partenaire modifié: ${partner.name} par ${req.user.email}`);
 
@@ -188,7 +199,9 @@ export const deletePartner = async (req, res) => {
 
     await partner.deleteOne();
 
-    logAdminAction("DELETE_PARTNER")({ user: req.user, partnerId: id });
+    console.log(
+      `[ADMIN ACTION] DELETE_PARTNER by ${req.user.email} (${req.user.role}) - Partner: ${partner.name}`
+    );
 
     console.log(
       `🗑️ Partenaire supprimé: ${partner.name} par ${req.user.email}`

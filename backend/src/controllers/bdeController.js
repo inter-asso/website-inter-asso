@@ -268,6 +268,61 @@ export const createBDE = async (req, res) => {
 };
 
 /**
+ * @route   DELETE /api/bdes/:id
+ * @desc    Supprimer un BDE
+ * @access  Private - Admin Interasso uniquement
+ */
+export const deleteBDE = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Seul Admin Interasso peut supprimer des BDE
+    if (req.user.role !== "admin_interasso") {
+      return res.status(403).json({
+        success: false,
+        error: "Accès refusé - Réservé aux administrateurs Interasso",
+      });
+    }
+
+    const bde = await BDE.findById(id);
+
+    if (!bde) {
+      return res.status(404).json({
+        success: false,
+        error: "BDE non trouvé",
+      });
+    }
+
+    // Vérifier s'il y a des événements liés
+    const eventCount = await Event.countDocuments({ bdeId: id });
+    if (eventCount > 0) {
+      return res.status(400).json({
+        success: false,
+        error: `Impossible de supprimer ce BDE : ${eventCount} événement(s) y sont rattachés. Supprimez-les d'abord.`,
+      });
+    }
+
+    await bde.deleteOne();
+
+    console.log(
+      `[ADMIN ACTION] DELETE_BDE by ${req.user.email} (${req.user.role}) - BDE: ${bde.name}`
+    );
+    console.log(`🗑️ BDE supprimé: ${bde.name} par ${req.user.email}`);
+
+    res.json({
+      success: true,
+      message: "BDE supprimé avec succès",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: "Erreur lors de la suppression du BDE",
+      details: error.message,
+    });
+  }
+};
+
+/**
  * @route   GET /api/bdes/:slug/stats
  * @desc    Statistiques d'un BDE (événements, membres)
  * @access  Public

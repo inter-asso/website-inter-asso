@@ -29,9 +29,9 @@ router.get("/my/events", authMiddleware, isAdminBDE, getMyBDEEvents);
 /**
  * @route   POST /api/events
  * @desc    Créer un nouvel événement
- * @access  Private - Admin BDE
+ * @access  Private - Admin BDE ou Admin Interasso
  */
-router.post("/", authMiddleware, isAdminBDE, createEvent);
+router.post("/", authMiddleware, createEvent);
 
 /**
  * @route   GET /api/events/:slug

@@ -1,7 +1,6 @@
 import Event from "../models/Event.js";
 import BDE from "../models/BDE.js";
 import notificationService from "../services/notificationService.js";
-import { logAdminAction } from "../middleware/permissions.js";
 
 /**
  * @route   GET /api/events
@@ -155,47 +154,84 @@ export const getMyBDEEvents = async (req, res) => {
 
 /**
  * @route   POST /api/events
- * @desc    Créer un nouvel événement (status PENDING)
- * @access  Private - Admin BDE
+ * @desc    Créer un nouvel événement
+ * @access  Private - Admin BDE ou Admin Interasso
  */
 export const createEvent = async (req, res) => {
   try {
-    if (req.user.role !== "admin_bde") {
+    // Vérifier que l'utilisateur est soit Admin BDE soit Admin Interasso
+    if (req.user.role !== "admin_bde" && req.user.role !== "admin_interasso") {
       return res.status(403).json({
         success: false,
         error:
-          "Accès refusé - Seuls les administrateurs BDE peuvent créer des événements",
+          "Accès refusé - Seuls les administrateurs BDE et Interasso peuvent créer des événements",
       });
     }
 
-    // Forcer le bdeId à celui de l'utilisateur
-    const eventData = {
-      ...req.body,
-      bdeId: req.user.bdeId,
-      createdBy: req.user.id,
-      status: "PENDING", // Toujours PENDING à la création
-    };
+    let eventData = { ...req.body };
+
+    // Admin BDE : forcer le bdeId à celui de l'utilisateur
+    if (req.user.role === "admin_bde") {
+      eventData.bdeId = req.user.bdeId;
+      eventData.status = "PENDING"; // Toujours PENDING pour Admin BDE
+    }
+
+    // Admin Interasso : peut choisir le BDE et le statut
+    if (req.user.role === "admin_interasso") {
+      // Vérifier que le bdeId est fourni
+      if (!eventData.bdeId) {
+        return res.status(400).json({
+          success: false,
+          error: "Le BDE organisateur est requis",
+        });
+      }
+      // Convertir le statut en majuscules si fourni
+      if (eventData.status) {
+        eventData.status = eventData.status.toUpperCase();
+      } else {
+        eventData.status = "PENDING"; // Par défaut
+      }
+    }
+
+    // Gérer l'image qui peut venir comme objet {url, publicId}
+    if (eventData.image && typeof eventData.image === "object") {
+      if (eventData.image.url) {
+        eventData.coverImage = {
+          url: eventData.image.url,
+          publicId: eventData.image.publicId || "default",
+        };
+      }
+      delete eventData.image;
+    }
+
+    eventData.createdBy = req.user.id;
 
     const event = await Event.create(eventData);
 
     // Populate les infos
     await event.populate("bdeId");
 
-    // Envoyer notification à Admin Interasso
-    await notificationService.notifyEventSubmitted(event, event.bdeId);
+    // Envoyer notification à Admin Interasso uniquement si créé par Admin BDE
+    if (req.user.role === "admin_bde") {
+      await notificationService.notifyEventSubmitted(event, event.bdeId);
+    }
 
     console.log(
-      `✨ Nouvel événement créé: "${event.title}" (${event.bdeId.name}) - Statut: PENDING`
+      `✨ Nouvel événement créé: "${event.title}" (${event.bdeId.name}) - Statut: ${event.status} par ${req.user.email} (${req.user.role})`
     );
 
     res.status(201).json({
       success: true,
-      message: "Événement créé et soumis pour validation",
+      message:
+        req.user.role === "admin_bde"
+          ? "Événement créé et soumis pour validation"
+          : "Événement créé avec succès",
       event: await Event.findById(event._id)
         .populate("bdeId", "name slug logo colors")
         .populate("createdBy", "firstName lastName"),
     });
   } catch (error) {
+    console.error("❌ Erreur création événement:", error);
     if (error.code === 11000) {
       return res.status(400).json({
         success: false,
@@ -258,19 +294,21 @@ export const updateEvent = async (req, res) => {
     const allowedFields = [
       "title",
       "description",
-      "shortDescription",
-      "startDate",
+      "date",
       "endDate",
       "location",
-      "address",
       "price",
       "maxParticipants",
       "registrationRequired",
-      "registrationDeadline",
       "category",
-      "image",
-      "tags",
+      "images",
+      "coverImage",
     ];
+
+    // Admin Interasso peut aussi modifier le statut et le bdeId
+    if (req.user.role === "admin_interasso") {
+      allowedFields.push("status", "bdeId");
+    }
 
     const updates = {};
     allowedFields.forEach((field) => {
@@ -279,12 +317,28 @@ export const updateEvent = async (req, res) => {
       }
     });
 
+    // Gérer l'image qui peut venir comme objet {url, publicId}
+    if (req.body.image && typeof req.body.image === "object") {
+      if (req.body.image.url) {
+        updates.coverImage = {
+          url: req.body.image.url,
+          publicId: req.body.image.publicId || "default",
+        };
+      }
+      delete updates.image;
+    }
+
+    // Convertir le statut en majuscules si présent
+    if (updates.status) {
+      updates.status = updates.status.toUpperCase();
+    }
+
     Object.assign(event, updates);
     await event.save();
 
-    logAdminAction("UPDATE_EVENT")({ user: req.user, eventId: id });
-
-    console.log(`✏️ Événement modifié: "${event.title}" par ${req.user.email}`);
+    console.log(
+      `✏️ Événement modifié: "${event.title}" par ${req.user.email} (${req.user.role})`
+    );
 
     res.json({
       success: true,
@@ -294,6 +348,7 @@ export const updateEvent = async (req, res) => {
         .populate("createdBy", "firstName lastName"),
     });
   } catch (error) {
+    console.error("❌ Erreur modification événement:", error);
     res.status(500).json({
       success: false,
       error: "Erreur lors de la modification de l'événement",
@@ -339,10 +394,8 @@ export const deleteEvent = async (req, res) => {
 
     await event.deleteOne();
 
-    logAdminAction("DELETE_EVENT")({ user: req.user, eventId: id });
-
     console.log(
-      `🗑️ Événement supprimé: "${event.title}" par ${req.user.email}`
+      `🗑️ Événement supprimé: "${event.title}" par ${req.user.email} (${req.user.role})`
     );
 
     res.json({
@@ -350,6 +403,7 @@ export const deleteEvent = async (req, res) => {
       message: "Événement supprimé avec succès",
     });
   } catch (error) {
+    console.error("❌ Erreur suppression événement:", error);
     res.status(500).json({
       success: false,
       error: "Erreur lors de la suppression de l'événement",

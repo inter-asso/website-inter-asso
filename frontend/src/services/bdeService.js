@@ -43,6 +43,12 @@ const bdeService = {
     const response = await api.put(`/bdes/${id}`, bdeData);
     return response.data;
   },
+
+  // Supprimer un BDE (Admin Interasso uniquement)
+  deleteBDE: async (id) => {
+    const response = await api.delete(`/bdes/${id}`);
+    return response.data;
+  },
 };
 
 export default bdeService;

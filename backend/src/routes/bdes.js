@@ -6,6 +6,7 @@ import {
   getBDEMembers,
   updateBDE,
   createBDE,
+  deleteBDE,
   getBDEStats,
 } from "../controllers/bdeController.js";
 import { authMiddleware, optionalAuth } from "../middleware/authMiddleware.js";
@@ -61,5 +62,12 @@ router.get("/:slug/stats", getBDEStats);
  * @access  Private - Admin Interasso
  */
 router.put("/:id", authMiddleware, isAdminInterasso, updateBDE);
+
+/**
+ * @route   DELETE /api/bdes/:id
+ * @desc    Supprimer un BDE
+ * @access  Private - Admin Interasso
+ */
+router.delete("/:id", authMiddleware, isAdminInterasso, deleteBDE);
 
 export default router;
