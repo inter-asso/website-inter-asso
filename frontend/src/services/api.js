@@ -15,9 +15,8 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
       console.log("🔑 Token envoyé:", token.substring(0, 20) + "...");
-    } else {
-      console.warn("⚠️  Aucun token trouvé dans localStorage");
     }
+    // Note: Pas de warning si pas de token (normal pour les visiteurs non connectés)
     return config;
   },
   (error) => {
