@@ -18,7 +18,9 @@ export default function LoadingSpinner({ size = "md", color = "blush" }) {
   return (
     <div className="flex items-center justify-center">
       <div
-        className={`animate-spin rounded-full border-b-2 ${sizes[size]} ${colors[color] || colors.blush}`}
+        className={`animate-spin rounded-full border-b-2 ${sizes[size]} ${
+          colors[color] || colors.blush
+        }`}
       ></div>
     </div>
   );

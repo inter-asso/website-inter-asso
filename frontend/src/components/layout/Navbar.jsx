@@ -115,7 +115,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-  <div className="md:hidden border-t border-light_orange-800">
+        <div className="md:hidden border-t border-light_orange-800">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link
               to="/bdes"

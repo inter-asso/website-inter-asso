@@ -141,9 +141,9 @@ export default function EventsDashboard() {
   };
 
   return (
-  <div className="min-h-screen bg-light_orange-900">
+    <div className="min-h-screen bg-light_orange-900">
       {/* Header */}
-  <header className="bg-white shadow-sm border-b border-chocolate_cosmos-200">
+      <header className="bg-white shadow-sm border-b border-chocolate_cosmos-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
@@ -189,12 +189,14 @@ export default function EventsDashboard() {
 
         {/* Events List */}
         {loading ? (
-            <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-raspberry_rose"></div>
           </div>
         ) : events.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-lg shadow">
-            <p className="text-chocolate_cosmos-400 text-lg mb-4">Aucun événement créé</p>
+            <p className="text-chocolate_cosmos-400 text-lg mb-4">
+              Aucun événement créé
+            </p>
             <button
               onClick={openCreateForm}
               className="bg-raspberry_rose text-white px-6 py-2 rounded-lg hover:bg-raspberry_rose-600"
@@ -232,20 +234,26 @@ export default function EventsDashboard() {
                     </p>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="text-chocolate_cosmos-400">📅 Date:</span>
+                        <span className="text-chocolate_cosmos-400">
+                          📅 Date:
+                        </span>
                         <span className="ml-2 font-medium">
                           {formatDate(event.date)} à{" "}
                           {formatTime(event.startDate)}
                         </span>
                       </div>
                       <div>
-                        <span className="text-chocolate_cosmos-400">📍 Lieu:</span>
+                        <span className="text-chocolate_cosmos-400">
+                          📍 Lieu:
+                        </span>
                         <span className="ml-2 font-medium">
                           {event.location}
                         </span>
                       </div>
                       <div>
-                        <span className="text-chocolate_cosmos-400">💰 Prix:</span>
+                        <span className="text-chocolate_cosmos-400">
+                          💰 Prix:
+                        </span>
                         <span className="ml-2 font-medium">
                           {event.price === 0 ? "Gratuit" : `${event.price} €`}
                         </span>

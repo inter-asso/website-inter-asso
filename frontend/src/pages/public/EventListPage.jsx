@@ -35,11 +35,13 @@ export default function EventListPage() {
 
   return (
     <PublicLayout>
-  <div className="bg-gradient-to-br from-light_orange-900 to-salmon_pink-900 min-h-screen">
+      <div className="bg-gradient-to-br from-light_orange-900 to-salmon_pink-900 min-h-screen">
         {/* Header */}
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-chocolate_cosmos">Événements</h1>
+            <h1 className="text-3xl font-bold text-chocolate_cosmos">
+              Événements
+            </h1>
           </div>
         </header>
 

@@ -662,20 +662,26 @@ export default function ValidationDashboard() {
                             </p>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                               <div>
-                                <span className="text-chocolate_cosmos-500">📅 Date:</span>
+                                <span className="text-chocolate_cosmos-500">
+                                  📅 Date:
+                                </span>
                                 <span className="ml-2 font-medium">
                                   {formatDate(event.date)} à{" "}
                                   {formatTime(event.startDate)}
                                 </span>
                               </div>
                               <div>
-                                <span className="text-chocolate_cosmos-500">📍 Lieu:</span>
+                                <span className="text-chocolate_cosmos-500">
+                                  📍 Lieu:
+                                </span>
                                 <span className="ml-2 font-medium">
                                   {event.location}
                                 </span>
                               </div>
                               <div>
-                                <span className="text-chocolate_cosmos-500">💰 Prix:</span>
+                                <span className="text-chocolate_cosmos-500">
+                                  💰 Prix:
+                                </span>
                                 <span className="ml-2 font-medium">
                                   {event.price === 0
                                     ? "Gratuit"
@@ -759,7 +765,10 @@ export default function ValidationDashboard() {
                     </thead>
                     <tbody className="bg-white divide-y divide-chocolate_cosmos-200">
                       {allEvents.map((event) => (
-                        <tr key={event._id} className="hover:bg-light_orange-50">
+                        <tr
+                          key={event._id}
+                          className="hover:bg-light_orange-50"
+                        >
                           <td className="px-6 py-4">
                             <div className="font-medium text-chocolate_cosmos-900">
                               {event.title}
@@ -818,21 +827,27 @@ export default function ValidationDashboard() {
                     <div className="text-2xl font-bold text-salmon_pink-600">
                       {stats.publishedEvents}
                     </div>
-                    <div className="text-sm text-chocolate_cosmos-600">Publiés</div>
+                    <div className="text-sm text-chocolate_cosmos-600">
+                      Publiés
+                    </div>
                   </div>
                   <div className="bg-light_orange-50 rounded-lg shadow p-6">
                     <div className="text-3xl mb-2">⏳</div>
                     <div className="text-2xl font-bold text-light_orange-600">
                       {stats.pendingEvents}
                     </div>
-                    <div className="text-sm text-chocolate_cosmos-600">En attente</div>
+                    <div className="text-sm text-chocolate_cosmos-600">
+                      En attente
+                    </div>
                   </div>
                   <div className="bg-raspberry_rose-50 rounded-lg shadow p-6">
                     <div className="text-3xl mb-2">❌</div>
                     <div className="text-2xl font-bold text-raspberry_rose-600">
                       {stats.rejectedEvents}
                     </div>
-                    <div className="text-sm text-chocolate_cosmos-600">Rejetés</div>
+                    <div className="text-sm text-chocolate_cosmos-600">
+                      Rejetés
+                    </div>
                   </div>
                 </div>
 
@@ -1184,7 +1199,9 @@ export default function ValidationDashboard() {
 
                 {events.length === 0 ? (
                   <div className="bg-white rounded-lg shadow p-6 text-center">
-                    <p className="text-chocolate_cosmos-500">Aucun événement trouvé.</p>
+                    <p className="text-chocolate_cosmos-500">
+                      Aucun événement trouvé.
+                    </p>
                   </div>
                 ) : (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
