@@ -25,11 +25,11 @@ export default function BDEListPage() {
 
   return (
     <PublicLayout>
-      <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 min-h-screen">
+  <div className="bg-gradient-to-br from-light_orange-900 to-salmon_pink-900 min-h-screen">
         {/* Header */}
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-chocolate_cosmos">
               Les BDE de l'IUT
             </h1>
           </div>
@@ -71,13 +71,13 @@ export default function BDEListPage() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-2xl font-bold text-chocolate_cosmos mb-2">
                       {bde.name}
                     </h2>
-                    <p className="text-sm text-gray-600 font-medium mb-3">
+                    <p className="text-sm text-chocolate_cosmos-400 font-medium mb-3">
                       {bde.fullName}
                     </p>
-                    <p className="text-gray-700 mb-4 line-clamp-3">
+                    <p className="text-chocolate_cosmos-400 mb-4 line-clamp-3">
                       {bde.description}
                     </p>
 
@@ -93,7 +93,7 @@ export default function BDEListPage() {
                               e.preventDefault();
                               window.open(bde.socialLinks.instagram, "_blank");
                             }}
-                            className="text-pink-600 hover:text-pink-700 transition-colors"
+                            className="text-salmon_pink hover:text-blush transition-colors"
                             aria-label="Instagram"
                           >
                             <svg
@@ -113,7 +113,7 @@ export default function BDEListPage() {
                               e.preventDefault();
                               window.open(bde.socialLinks.facebook, "_blank");
                             }}
-                            className="text-blue-600 hover:text-blue-700 transition-colors"
+                            className="text-raspberry_rose hover:text-raspberry_rose-600 transition-colors"
                             aria-label="Facebook"
                           >
                             <svg
@@ -128,7 +128,7 @@ export default function BDEListPage() {
                       </div>
                     )}
 
-                    <div className="text-purple-600 font-medium flex items-center">
+                    <div className="text-raspberry_rose font-medium flex items-center">
                       Découvrir →
                     </div>
                   </div>

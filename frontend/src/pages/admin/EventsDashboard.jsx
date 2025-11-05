@@ -141,29 +141,29 @@ export default function EventsDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+  <div className="min-h-screen bg-light_orange-900">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+  <header className="bg-white shadow-sm border-b border-chocolate_cosmos-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-chocolate_cosmos">
                 Dashboard {user?.bdeId?.name}
               </h1>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-chocolate_cosmos-400 mt-1">
                 Bienvenue, {user?.firstName} {user?.lastName}
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => navigate("/")}
-                className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-100"
+                className="text-chocolate_cosmos-600 hover:text-chocolate_cosmos-900 px-4 py-2 rounded-lg hover:bg-light_orange-100"
               >
                 🏠 Accueil
               </button>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                className="bg-raspberry_rose-600 text-white px-4 py-2 rounded-lg hover:bg-raspberry_rose-700"
               >
                 Déconnexion
               </button>
@@ -176,12 +176,12 @@ export default function EventsDashboard() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Actions Bar */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-gray-900">
+          <h2 className="text-xl font-bold text-chocolate_cosmos-900">
             Mes événements ({events.length})
           </h2>
           <button
             onClick={openCreateForm}
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 font-medium"
+            className="bg-raspberry_rose text-white px-6 py-2 rounded-lg hover:bg-raspberry_rose-600 font-medium"
           >
             ➕ Nouvel événement
           </button>
@@ -189,15 +189,15 @@ export default function EventsDashboard() {
 
         {/* Events List */}
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+            <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-raspberry_rose"></div>
           </div>
         ) : events.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-lg shadow">
-            <p className="text-gray-500 text-lg mb-4">Aucun événement créé</p>
+            <p className="text-chocolate_cosmos-400 text-lg mb-4">Aucun événement créé</p>
             <button
               onClick={openCreateForm}
-              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
+              className="bg-raspberry_rose text-white px-6 py-2 rounded-lg hover:bg-raspberry_rose-600"
             >
               Créer mon premier événement
             </button>
@@ -209,53 +209,53 @@ export default function EventsDashboard() {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-lg font-bold text-gray-900">
+                      <h3 className="text-lg font-bold text-chocolate_cosmos">
                         {event.title}
                       </h3>
                       <span
                         className={`px-2 py-1 text-xs font-medium rounded-full ${
                           event.status === "PUBLISHED"
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-salmon_pink-900 text-salmon_pink"
                             : event.status === "PENDING"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-red-100 text-red-800"
+                            ? "bg-light_orange-900 text-chocolate_cosmos"
+                            : "bg-chocolate_cosmos-900 text-chocolate_cosmos"
                         }`}
                       >
                         {EVENT_STATUS[event.status]?.label}
                       </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-raspberry_rose-900 text-raspberry_rose">
                         {EVENT_CATEGORIES[event.category]?.label}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-chocolate_cosmos-400 mb-4">
                       {event.shortDescription || event.description}
                     </p>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="text-gray-500">📅 Date:</span>
+                        <span className="text-chocolate_cosmos-400">📅 Date:</span>
                         <span className="ml-2 font-medium">
                           {formatDate(event.date)} à{" "}
                           {formatTime(event.startDate)}
                         </span>
                       </div>
                       <div>
-                        <span className="text-gray-500">📍 Lieu:</span>
+                        <span className="text-chocolate_cosmos-400">📍 Lieu:</span>
                         <span className="ml-2 font-medium">
                           {event.location}
                         </span>
                       </div>
                       <div>
-                        <span className="text-gray-500">💰 Prix:</span>
+                        <span className="text-chocolate_cosmos-400">💰 Prix:</span>
                         <span className="ml-2 font-medium">
                           {event.price === 0 ? "Gratuit" : `${event.price} €`}
                         </span>
                       </div>
                       {event.status === "REJECTED" && event.rejectionReason && (
                         <div className="col-span-2">
-                          <span className="text-red-500">
+                          <span className="text-chocolate_cosmos-700">
                             ❌ Raison du rejet:
                           </span>
-                          <span className="ml-2 text-red-600 font-medium">
+                          <span className="ml-2 text-chocolate_cosmos font-medium">
                             {event.rejectionReason}
                           </span>
                         </div>
@@ -266,14 +266,14 @@ export default function EventsDashboard() {
                     {event.status === "PENDING" && (
                       <button
                         onClick={() => openEditForm(event)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 whitespace-nowrap"
+                        className="bg-raspberry_rose text-white px-4 py-2 rounded-lg hover:bg-raspberry_rose-600 whitespace-nowrap"
                       >
                         ✏️ Modifier
                       </button>
                     )}
                     <button
                       onClick={() => handleDelete(event._id)}
-                      className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 whitespace-nowrap"
+                      className="bg-raspberry_rose-600 text-white px-4 py-2 rounded-lg hover:bg-raspberry_rose-700 whitespace-nowrap"
                     >
                       🗑️ Supprimer
                     </button>
@@ -289,8 +289,8 @@ export default function EventsDashboard() {
       {showEventForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 my-8">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">
+            <div className="px-6 py-4 border-b border-chocolate_cosmos-200">
+              <h3 className="text-lg font-semibold text-chocolate_cosmos-900">
                 {editingEvent ? "Modifier l'événement" : "Nouvel événement"}
               </h3>
             </div>
@@ -299,7 +299,7 @@ export default function EventsDashboard() {
               className="px-6 py-4 space-y-4 max-h-[70vh] overflow-y-auto"
             >
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                   Titre *
                 </label>
                 <input
@@ -309,12 +309,12 @@ export default function EventsDashboard() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                   Description courte
                 </label>
                 <input
@@ -326,13 +326,13 @@ export default function EventsDashboard() {
                       shortDescription: e.target.value,
                     })
                   }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   placeholder="Résumé en une ligne"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                   Description complète *
                 </label>
                 <textarea
@@ -342,13 +342,13 @@ export default function EventsDashboard() {
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                     Date *
                   </label>
                   <input
@@ -362,11 +362,11 @@ export default function EventsDashboard() {
                         startDate: e.target.value,
                       })
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                     Fin
                   </label>
                   <input
@@ -375,14 +375,14 @@ export default function EventsDashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, endDate: e.target.value })
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                     Lieu *
                   </label>
                   <input
@@ -392,11 +392,11 @@ export default function EventsDashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, location: e.target.value })
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                     Adresse
                   </label>
                   <input
@@ -405,14 +405,14 @@ export default function EventsDashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, address: e.target.value })
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                     Prix (€) *
                   </label>
                   <input
@@ -424,11 +424,11 @@ export default function EventsDashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, price: e.target.value })
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                     Catégorie *
                   </label>
                   <select
@@ -437,7 +437,7 @@ export default function EventsDashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, category: e.target.value })
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                   >
                     {Object.entries(EVENT_CATEGORIES).map(([key, value]) => (
                       <option key={key} value={key}>
@@ -459,11 +459,11 @@ export default function EventsDashboard() {
                       registrationRequired: e.target.checked,
                     })
                   }
-                  className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-blush-600 focus:ring-blush-500 border-chocolate_cosmos-300 rounded"
                 />
                 <label
                   htmlFor="registration"
-                  className="ml-2 block text-sm text-gray-900"
+                  className="ml-2 block text-sm text-chocolate_cosmos-900"
                 >
                   Inscription requise
                 </label>
@@ -472,7 +472,7 @@ export default function EventsDashboard() {
               {formData.registrationRequired && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                       Places max
                     </label>
                     <input
@@ -485,11 +485,11 @@ export default function EventsDashboard() {
                           maxParticipants: e.target.value,
                         })
                       }
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-chocolate_cosmos-700 mb-1">
                       Date limite inscription
                     </label>
                     <input
@@ -501,25 +501,25 @@ export default function EventsDashboard() {
                           registrationDeadline: e.target.value,
                         })
                       }
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full border border-chocolate_cosmos-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blush-500"
                     />
                   </div>
                 </div>
               )}
             </form>
-            <div className="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+            <div className="px-6 py-4 bg-light_orange-50 flex justify-end space-x-3 border-t border-chocolate_cosmos-200">
               <button
                 type="button"
                 onClick={() => setShowEventForm(false)}
                 disabled={submitLoading}
-                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+                className="px-4 py-2 border border-chocolate_cosmos-300 rounded-lg text-chocolate_cosmos-700 hover:bg-light_orange-100 disabled:opacity-50"
               >
                 Annuler
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={submitLoading}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-raspberry_rose text-white rounded-lg hover:bg-raspberry_rose-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitLoading
                   ? "Enregistrement..."

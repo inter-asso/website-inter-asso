@@ -7,6 +7,8 @@ export default function Toast({
   onClose,
   duration = 3000,
 }) {
+  // Help linters detect motion usage and allow JSX-friendly component
+  const MotionDiv = motion.div;
   useEffect(() => {
     if (duration > 0) {
       const timer = setTimeout(() => {
@@ -17,10 +19,10 @@ export default function Toast({
   }, [duration, onClose]);
 
   const bgColors = {
-    success: "bg-green-500",
-    error: "bg-red-500",
-    warning: "bg-yellow-500",
-    info: "bg-blue-500",
+    success: "bg-salmon_pink-600",
+    error: "bg-raspberry_rose-600",
+    warning: "bg-light_orange-600",
+    info: "bg-blush-600",
   };
 
   const icons = {
@@ -32,7 +34,7 @@ export default function Toast({
 
   return (
     <AnimatePresence>
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: -50, x: "-50%" }}
         animate={{ opacity: 1, y: 0, x: "-50%" }}
         exit={{ opacity: 0, y: -50, x: "-50%" }}
@@ -42,11 +44,11 @@ export default function Toast({
         <p className="flex-1 font-medium">{message}</p>
         <button
           onClick={onClose}
-          className="text-white hover:text-gray-200 transition-colors font-bold text-lg"
+          className="text-white/90 hover:text-white transition-colors font-bold text-lg"
         >
           ✕
         </button>
-      </motion.div>
+      </MotionDiv>
     </AnimatePresence>
   );
 }

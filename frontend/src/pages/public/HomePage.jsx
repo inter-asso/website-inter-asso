@@ -74,21 +74,24 @@ export default function HomePage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
+      <div className="relative bg-gradient-to-br from-light_orange-900 via-white to-salmon_pink-900">
         {/* <Pointer className="text-purple-600">
           <div className="bg-purple-600 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium">
             ✨ Explore !
           </div>
         </Pointer> */}
-        <Pointer className="fill-blue-500" />
+        {/* <Pointer className="fill-blue-500" /> */}
 
         <div className="container mx-auto px-4 py-16">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
               Bienvenue à l'
-              <span className="text-purple-600">IUT de Lannion</span> 🎓
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blush to-raspberry_rose">
+                IUT de Lannion
+              </span>{" "}
+              🎓
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-chocolate_cosmos mb-8">
               Découvre les BDE, les événements et toute la vie étudiante de ton
               campus !
             </p>
@@ -97,13 +100,13 @@ export default function HomePage() {
               <div className="space-x-4 hero-buttons">
                 <Link
                   to="/events"
-                  className="inline-block px-8 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                  className="inline-block px-8 py-3 bg-blush text-white font-medium rounded-lg hover:bg-blush-600 transition-colors shadow-lg shadow-blush/30"
                 >
                   🎉 Découvrir les événements
                 </Link>
                 <Link
                   to="/bdes"
-                  className="inline-block px-8 py-3 bg-white text-purple-600 font-medium rounded-lg border-2 border-purple-600 hover:bg-purple-50 transition-colors"
+                  className="inline-block px-8 py-3 bg-raspberry_rose text-white font-medium rounded-lg hover:bg-raspberry_rose-600 transition-colors"
                 >
                   🎓 Les BDE
                 </Link>
@@ -113,7 +116,7 @@ export default function HomePage() {
                       ? "/admin/validation"
                       : "/admin/events"
                   }
-                  className="inline-block px-6 py-2 text-sm bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                  className="inline-block px-8 py-3 text-sm bg-light_orange-800 text-chocolate_cosmos font-medium rounded-lg hover:bg-light_orange-700 transition-colors"
                 >
                   ⚙️ Espace Admin
                 </Link>
@@ -122,19 +125,19 @@ export default function HomePage() {
               <div className="space-x-4 hero-buttons">
                 <Link
                   to="/events"
-                  className="inline-block px-8 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                  className="inline-block px-8 py-3 bg-blush text-white font-medium rounded-lg hover:bg-blush-600 transition-colors shadow-lg shadow-blush/30"
                 >
                   🎉 Découvrir les événements
                 </Link>
                 <Link
                   to="/bdes"
-                  className="inline-block px-8 py-3 bg-white text-purple-600 font-medium rounded-lg border-2 border-purple-600 hover:bg-purple-50 transition-colors"
+                  className="inline-block px-8 py-3 bg-raspberry_rose text-white font-medium rounded-lg hover:bg-raspberry_rose-600 transition-colors"
                 >
                   🎓 Les BDE
                 </Link>
                 <Link
                   to="/login"
-                  className="inline-block px-6 py-2 text-sm bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                  className="inline-block px-6 py-2 text-sm bg-light_orange-800 text-chocolate_cosmos font-medium rounded-lg hover:bg-light_orange-700 transition-colors"
                 >
                   Connexion
                 </Link>
@@ -193,7 +196,7 @@ export default function HomePage() {
 
           {/* Features */}
           <div className="mt-16 max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            <h2 className="text-3xl font-bold text-center text-chocolate_cosmos mb-12">
               Pourquoi rejoindre la communauté ? 🚀
             </h2>
 
@@ -201,9 +204,7 @@ export default function HomePage() {
               <BentoCard
                 name="Des événements toute l'année"
                 className="col-span-2"
-                background={
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-400 opacity-80" />
-                }
+                background={<div className="absolute inset-0 bg-blush" />}
                 Icon={() => <span className="text-5xl">🎊</span>}
                 description="Soirées, concerts, afterworks, intégrations... Il y a toujours quelque chose à faire sur le campus !"
                 href="/events"
@@ -214,7 +215,7 @@ export default function HomePage() {
                 name="Rencontre des étudiants"
                 className="col-span-1"
                 background={
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 opacity-80" />
+                  <div className="absolute inset-0 bg-raspberry_rose" />
                 }
                 Icon={() => <span className="text-5xl">🤝</span>}
                 description="Fais de nouvelles rencontres, crée des liens et intègre-toi facilement dans la vie étudiante"
@@ -225,9 +226,7 @@ export default function HomePage() {
               <BentoCard
                 name="Réductions exclusives"
                 className="col-span-1"
-                background={
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-blue-400 opacity-80" />
-                }
+                background={<div className="absolute inset-0 bg-salmon_pink" />}
                 Icon={() => <span className="text-5xl">💰</span>}
                 description="Profite de réductions chez nos partenaires : restaurants, bars, boutiques et plus encore"
                 href="/partners"
@@ -238,7 +237,7 @@ export default function HomePage() {
                 name="Toujours informé"
                 className="col-span-2"
                 background={
-                  <div className="absolute inset-0 bg-gradient-to-br from-pink-400 to-purple-400 opacity-80" />
+                  <div className="absolute inset-0 bg-light_orange" />
                 }
                 Icon={() => <span className="text-5xl">📱</span>}
                 description="Toutes les infos en temps réel : événements, actualités, bons plans... Ne rate plus rien !"
@@ -256,16 +255,18 @@ export default function HomePage() {
                   <BorderBeam
                     size={100}
                     duration={8}
-                    colorFrom="#A855F7"
-                    colorTo="#D946EF"
+                    colorFrom="#da627d"
+                    colorTo="#a53860"
                   />
-                  <div className="text-5xl font-bold text-purple-600 mb-2">
+                  <div className="text-5xl font-bold text-blush mb-2">
                     <NumberTicker value={stats.totalEvents} delay={0.3} />+
                   </div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">
+                  <div className="text-xl font-semibold text-chocolate_cosmos mb-1">
                     Événements
                   </div>
-                  <div className="text-gray-600">organisés cette année</div>
+                  <div className="text-chocolate_cosmos-400">
+                    organisés cette année
+                  </div>
                 </div>
               </AnimatedCard>
 
@@ -275,16 +276,18 @@ export default function HomePage() {
                     size={100}
                     duration={9}
                     delay={1}
-                    colorFrom="#3B82F6"
-                    colorTo="#8B3FBF"
+                    colorFrom="#a53860"
+                    colorTo="#450920"
                   />
-                  <div className="text-5xl font-bold text-blue-600 mb-2">
+                  <div className="text-5xl font-bold text-raspberry_rose mb-2">
                     <NumberTicker value={stats.totalBDEs} delay={0.4} />
                   </div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">
+                  <div className="text-xl font-semibold text-chocolate_cosmos mb-1">
                     BDE Actifs
                   </div>
-                  <div className="text-gray-600">dans l'établissement</div>
+                  <div className="text-chocolate_cosmos-400">
+                    dans l'établissement
+                  </div>
                 </div>
               </AnimatedCard>
 
@@ -294,16 +297,16 @@ export default function HomePage() {
                     size={100}
                     duration={10}
                     delay={2}
-                    colorFrom="#10B981"
-                    colorTo="#3B82F6"
+                    colorFrom="#ffa5ab"
+                    colorTo="#da627d"
                   />
-                  <div className="text-5xl font-bold text-green-600 mb-2">
+                  <div className="text-5xl font-bold text-salmon_pink mb-2">
                     <NumberTicker value={stats.totalPartners} delay={0.5} />+
                   </div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">
+                  <div className="text-xl font-semibold text-chocolate_cosmos mb-1">
                     Partenaires
                   </div>
-                  <div className="text-gray-600">
+                  <div className="text-chocolate_cosmos-400">
                     avec réductions exclusives
                   </div>
                 </div>
@@ -318,10 +321,10 @@ export default function HomePage() {
         <section className="py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-chocolate_cosmos mb-4">
                 📅 Prochains Événements
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-blush-400">
                 Ne rate pas les événements à venir sur le campus !
               </p>
             </div>
@@ -334,8 +337,8 @@ export default function HomePage() {
                       size={150}
                       duration={10}
                       delay={index * 2}
-                      colorFrom="#8B3FBF"
-                      colorTo="#D946EF"
+                      colorFrom="#da627d"
+                      colorTo="#a53860"
                       borderWidth={2}
                     />
 
@@ -346,7 +349,7 @@ export default function HomePage() {
                         className="w-full h-48 object-cover"
                       />
                     ) : (
-                      <div className="w-full h-48 bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+                      <div className="w-full h-48 bg-blush flex items-center justify-center">
                         <span className="text-6xl">
                           {EVENT_CATEGORIES_ARRAY.find(
                             (c) => c.value === event.category
@@ -357,34 +360,34 @@ export default function HomePage() {
 
                     <div className="p-6">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="px-3 py-1 bg-purple-100 text-purple-700 text-sm font-semibold rounded-full">
+                        <span className="px-3 py-1 bg-blush text-white text-sm font-semibold rounded-full">
                           {EVENT_CATEGORIES_ARRAY.find(
                             (c) => c.value === event.category
                           )?.label || event.category}
                         </span>
                       </div>
 
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-xl font-bold text-chocolate_cosmos mb-2">
                         {event.title}
                       </h3>
 
-                      <p className="text-gray-600 mb-4 line-clamp-2">
+                      <p className="text-chocolate_cosmos-400 mb-4 line-clamp-2">
                         {event.description}
                       </p>
 
-                      <div className="flex items-center text-gray-500 text-sm mb-2">
+                      <div className="flex items-center text-chocolate_cosmos-400 text-sm mb-2">
                         <span className="mr-2">📍</span>
                         <span>{event.location}</span>
                       </div>
 
-                      <div className="flex items-center text-gray-500 text-sm mb-4">
+                      <div className="flex items-center text-chocolate_cosmos-400 text-sm mb-4">
                         <span className="mr-2">📅</span>
                         <span>{formatDate(event.date)}</span>
                       </div>
 
                       <Link
                         to="/events"
-                        className="block w-full text-center px-4 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                        className="block w-full text-center px-4 py-2 bg-blush text-white font-medium rounded-lg hover:bg-blush-600 transition-colors shadow-lg shadow-blush/20"
                       >
                         En savoir plus
                       </Link>
@@ -397,7 +400,7 @@ export default function HomePage() {
             <div className="text-center mt-10">
               <Link
                 to="/events"
-                className="inline-block px-8 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                className="inline-block px-8 py-3 bg-blush text-white font-medium rounded-lg hover:bg-blush-600 transition-colors shadow-lg shadow-blush/30"
               >
                 Voir tous les événements →
               </Link>
@@ -408,13 +411,13 @@ export default function HomePage() {
 
       {/* Featured BDEs Section */}
       {featuredBDEs.length > 0 && (
-        <section className="py-16 bg-gradient-to-br from-purple-50 to-blue-50">
+        <section className="py-16 bg-gradient-to-br from-light_orange-900 via-salmon_pink-900 to-light_orange-800">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-chocolate_cosmos mb-4">
                 🎓 Nos BDE
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-blush-400">
                 Découvre les Bureaux Des Étudiants et leurs équipes passionnées
               </p>
             </div>
@@ -427,13 +430,13 @@ export default function HomePage() {
                       size={120}
                       duration={12}
                       delay={index * 3}
-                      colorFrom="#3B82F6"
-                      colorTo="#8B3FBF"
+                      colorFrom="#a53860"
+                      colorTo="#450920"
                       borderWidth={2}
                     />
 
                     {bde.logo?.url ? (
-                      <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center p-6">
+                      <div className="w-full h-48 bg-light_orange-200 flex items-center justify-center p-6">
                         <img
                           src={bde.logo.url}
                           alt={bde.name}
@@ -441,17 +444,17 @@ export default function HomePage() {
                         />
                       </div>
                     ) : (
-                      <div className="w-full h-48 bg-gradient-to-br from-purple-400 to-blue-400 flex items-center justify-center">
+                      <div className="w-full h-48 bg-raspberry_rose flex items-center justify-center">
                         <span className="text-6xl">🎓</span>
                       </div>
                     )}
 
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-xl font-bold text-chocolate_cosmos mb-2">
                         {bde.name}
                       </h3>
 
-                      <p className="text-gray-600 mb-4 line-clamp-3">
+                      <p className="text-chocolate_cosmos-400 mb-4 line-clamp-3">
                         {bde.description}
                       </p>
 
@@ -480,7 +483,7 @@ export default function HomePage() {
                             },
                           ]}
                         />
-                        <span className="text-sm text-gray-600">
+                        <span className="text-sm text-chocolate_cosmos-400">
                           {bde.membersCount || 15}+ membres actifs
                         </span>
                       </div>
@@ -492,7 +495,7 @@ export default function HomePage() {
                               href={bde.socialMedia.instagram}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-pink-500 hover:text-pink-600 transition-colors"
+                              className="text-salmon_pink hover:text-blush transition-colors"
                             >
                               <svg
                                 className="w-6 h-6"
@@ -508,7 +511,7 @@ export default function HomePage() {
                               href={bde.socialMedia.facebook}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-700 transition-colors"
+                              className="text-blush hover:text-blush-600 transition-colors"
                             >
                               <svg
                                 className="w-6 h-6"
@@ -524,7 +527,7 @@ export default function HomePage() {
 
                       <Link
                         to="/bdes"
-                        className="block w-full text-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                        className="block w-full text-center px-4 py-2 bg-raspberry_rose text-white font-medium rounded-lg hover:bg-raspberry_rose-600 transition-colors shadow-lg shadow-raspberry_rose/20"
                       >
                         En savoir plus
                       </Link>
@@ -537,7 +540,7 @@ export default function HomePage() {
             <div className="text-center mt-10">
               <Link
                 to="/bdes"
-                className="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-block px-8 py-3 bg-raspberry_rose text-white font-medium rounded-lg hover:bg-raspberry_rose-600 transition-colors shadow-lg shadow-raspberry_rose/30"
               >
                 Découvrir tous les BDE →
               </Link>
@@ -550,69 +553,75 @@ export default function HomePage() {
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-chocolate_cosmos mb-4">
               💬 Ils ont participé
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-blush-400">
               Découvre les témoignages des étudiants
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <AnimatedCard delay={0.1}>
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg">
+              <div className="bg-gradient-to-br from-salmon_pink-900 to-light_orange-900 rounded-xl p-6 shadow-lg border border-salmon_pink-800">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                  <div className="w-12 h-12 bg-blush rounded-full flex items-center justify-center text-white text-xl font-bold">
                     A
                   </div>
                   <div className="ml-3">
-                    <div className="font-semibold text-gray-900">Alexandre</div>
-                    <div className="text-sm text-gray-600">Étudiant GEA</div>
+                    <div className="font-semibold text-chocolate_cosmos">
+                      Alexandre
+                    </div>
+                    <div className="text-sm text-blush-400">Étudiant GEA</div>
                   </div>
                 </div>
-                <p className="text-gray-700 italic">
+                <p className="text-chocolate_cosmos-400 italic">
                   "Les événements organisés par les BDE sont incroyables ! J'ai
                   rencontré plein de monde et je me suis super bien intégré. 🎉"
                 </p>
-                <div className="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+                <div className="mt-3 text-salmon_pink">⭐⭐⭐⭐⭐</div>
               </div>
             </AnimatedCard>
 
             <AnimatedCard delay={0.2}>
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 shadow-lg">
+              <div className="bg-gradient-to-br from-salmon_pink-900 to-light_orange-900 rounded-xl p-6 shadow-lg border border-salmon_pink-800">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                  <div className="w-12 h-12 bg-raspberry_rose rounded-full flex items-center justify-center text-white text-xl font-bold">
                     M
                   </div>
                   <div className="ml-3">
-                    <div className="font-semibold text-gray-900">Marie</div>
-                    <div className="text-sm text-gray-600">Étudiante INFO</div>
+                    <div className="font-semibold text-chocolate_cosmos">
+                      Marie
+                    </div>
+                    <div className="text-sm text-blush-400">Étudiante INFO</div>
                   </div>
                 </div>
-                <p className="text-gray-700 italic">
+                <p className="text-chocolate_cosmos-400 italic">
                   "Les réductions partenaires sont vraiment top ! J'économise
                   sur mes sorties et mes courses. Merci les BDE ! 💰"
                 </p>
-                <div className="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+                <div className="mt-3 text-salmon_pink">⭐⭐⭐⭐⭐</div>
               </div>
             </AnimatedCard>
 
             <AnimatedCard delay={0.3}>
-              <div className="bg-gradient-to-br from-pink-50 to-blue-50 rounded-xl p-6 shadow-lg">
+              <div className="bg-gradient-to-br from-salmon_pink-900 to-light_orange-900 rounded-xl p-6 shadow-lg border border-salmon_pink-800">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                  <div className="w-12 h-12 bg-salmon_pink rounded-full flex items-center justify-center text-white text-xl font-bold">
                     L
                   </div>
                   <div className="ml-3">
-                    <div className="font-semibold text-gray-900">Lucas</div>
-                    <div className="text-sm text-gray-600">Étudiant MMI</div>
+                    <div className="font-semibold text-chocolate_cosmos">
+                      Lucas
+                    </div>
+                    <div className="text-sm text-blush-400">Étudiant MMI</div>
                   </div>
                 </div>
-                <p className="text-gray-700 italic">
+                <p className="text-chocolate_cosmos-400 italic">
                   "Ambiance de fou lors des soirées ! Les BDE font un travail
                   incroyable pour animer le campus. 🔥"
                 </p>
-                <div className="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+                <div className="mt-3 text-salmon_pink">⭐⭐⭐⭐⭐</div>
               </div>
             </AnimatedCard>
           </div>
@@ -621,13 +630,13 @@ export default function HomePage() {
 
       {/* Partners Section */}
       {partners.length > 0 && (
-        <section className="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <section className="py-16 bg-gradient-to-br from-light_orange-900 to-salmon_pink-900">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-chocolate_cosmos mb-4">
                 🤝 Nos Partenaires
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-blush-400">
                 Profite de réductions exclusives chez nos partenaires
               </p>
             </div>
@@ -647,11 +656,11 @@ export default function HomePage() {
                   ) : (
                     <div className="text-4xl mb-3">🏢</div>
                   )}
-                  <h3 className="font-semibold text-gray-900 text-center text-sm">
+                  <h3 className="font-semibold text-chocolate_cosmos text-center text-sm">
                     {partner.name}
                   </h3>
                   {partner.discount && (
-                    <span className="mt-2 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
+                    <span className="mt-2 px-3 py-1 bg-salmon_pink text-white text-xs font-semibold rounded-full shadow-lg">
                       {partner.discount}
                     </span>
                   )}
@@ -662,7 +671,7 @@ export default function HomePage() {
             <div className="text-center mt-10">
               <Link
                 to="/partners"
-                className="inline-block px-8 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+                className="inline-block px-8 py-3 bg-salmon_pink text-white font-medium rounded-lg hover:bg-salmon_pink-600 transition-colors shadow-lg shadow-salmon_pink/30"
               >
                 Voir tous les partenaires →
               </Link>
@@ -672,25 +681,25 @@ export default function HomePage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-raspberry_rose to-chocolate_cosmos text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">
             Prêt à rejoindre l'aventure ? 🚀
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 text-salmon_pink-900">
             Découvre tous les événements, rencontre les BDE et profite des
             avantages exclusifs dès maintenant !
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/events"
-              className="px-8 py-3 bg-white text-purple-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+              className="px-8 py-3 bg-white hover:bg-light_orange-900 text-raspberry_rose hover:text-chocolate_cosmos font-medium rounded-lg transition-colors shadow-lg"
             >
               🎉 Voir les événements
             </Link>
             <Link
               to="/bdes"
-              className="px-8 py-3 bg-purple-800 text-white font-medium rounded-lg hover:bg-purple-900 transition-colors border-2 border-white"
+              className="px-8 py-3 bg-salmon_pink hover:bg-blush text-white font-medium rounded-lg transition-colors shadow-lg shadow-salmon_pink/30"
             >
               🎓 Découvrir les BDE
             </Link>

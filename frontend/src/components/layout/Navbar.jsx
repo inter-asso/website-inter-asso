@@ -19,8 +19,8 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold">
-                Inter<span className="text-purple-600">ASSO</span>
+              <span className="text-2xl font-bold text-chocolate_cosmos">
+                Inter<span className="text-raspberry_rose">ASSO</span>
               </span>
             </Link>
           </div>
@@ -29,19 +29,19 @@ export default function Navbar() {
           <div className="hidden md:flex md:items-center md:space-x-8">
             <Link
               to="/bdes"
-              className="text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors"
+              className="text-chocolate_cosmos hover:text-raspberry_rose px-3 py-2 text-sm font-medium transition-colors"
             >
               Les BDE
             </Link>
             <Link
               to="/events"
-              className="text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors"
+              className="text-chocolate_cosmos hover:text-raspberry_rose px-3 py-2 text-sm font-medium transition-colors"
             >
               Événements
             </Link>
             <Link
               to="/partners"
-              className="text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors"
+              className="text-chocolate_cosmos hover:text-raspberry_rose px-3 py-2 text-sm font-medium transition-colors"
             >
               Partenaires
             </Link>
@@ -55,17 +55,17 @@ export default function Navbar() {
                       ? "/admin/validation"
                       : "/admin/events"
                   }
-                  className="text-purple-600 hover:text-purple-700 px-3 py-2 text-sm font-medium"
+                  className="text-raspberry_rose hover:text-raspberry_rose-600 px-3 py-2 text-sm font-medium"
                 >
                   📊 Dashboard
                 </Link>
-                <div className="border-l border-gray-300 h-6"></div>
-                <div className="text-sm text-gray-700">
+                <div className="border-l border-chocolate_cosmos-300 h-6"></div>
+                <div className="text-sm text-chocolate_cosmos-400">
                   {user?.firstName} {user?.lastName}
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="text-red-600 hover:text-red-700 px-3 py-2 text-sm font-medium"
+                  className="text-raspberry_rose-600 hover:text-raspberry_rose-700 px-3 py-2 text-sm font-medium"
                 >
                   Déconnexion
                 </button>
@@ -73,7 +73,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+                className="bg-raspberry_rose text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-raspberry_rose-600 transition-colors"
               >
                 Connexion
               </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-purple-600 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-chocolate_cosmos hover:text-raspberry_rose focus:outline-none"
             >
               <svg
                 className="h-6 w-6"
@@ -115,25 +115,25 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200">
+  <div className="md:hidden border-t border-light_orange-800">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link
               to="/bdes"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 rounded-md"
+              className="block px-3 py-2 text-base font-medium text-chocolate_cosmos hover:text-raspberry_rose hover:bg-light_orange-900 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Les BDE
             </Link>
             <Link
               to="/events"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 rounded-md"
+              className="block px-3 py-2 text-base font-medium text-chocolate_cosmos hover:text-raspberry_rose hover:bg-light_orange-900 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Événements
             </Link>
             <Link
               to="/partners"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 rounded-md"
+              className="block px-3 py-2 text-base font-medium text-chocolate_cosmos hover:text-raspberry_rose hover:bg-light_orange-900 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Partenaires
@@ -141,19 +141,19 @@ export default function Navbar() {
 
             {isAuthenticated ? (
               <>
-                <div className="border-t border-gray-200 my-2"></div>
+                <div className="border-t border-chocolate_cosmos-200 my-2"></div>
                 <Link
                   to={
                     user?.role === "admin_interasso"
                       ? "/admin/validation"
                       : "/admin/events"
                   }
-                  className="block px-3 py-2 text-base font-medium text-purple-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-base font-medium text-raspberry_rose hover:bg-light_orange-900 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   📊 Dashboard
                 </Link>
-                <div className="px-3 py-2 text-sm text-gray-600">
+                <div className="px-3 py-2 text-sm text-chocolate_cosmos-400">
                   {user?.firstName} {user?.lastName}
                 </div>
                 <button
@@ -161,17 +161,17 @@ export default function Navbar() {
                     handleLogout();
                     setMobileMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:bg-gray-50 rounded-md"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-raspberry_rose-600 hover:bg-light_orange-100 rounded-md"
                 >
                   Déconnexion
                 </button>
               </>
             ) : (
               <>
-                <div className="border-t border-gray-200 my-2"></div>
+                <div className="border-t border-chocolate_cosmos-200 my-2"></div>
                 <Link
                   to="/login"
-                  className="block px-3 py-2 text-base font-medium text-purple-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-base font-medium text-raspberry_rose hover:bg-light_orange-900 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Connexion

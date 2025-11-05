@@ -29,15 +29,15 @@ export default function PartnersPage() {
 
   return (
     <PublicLayout>
-      <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 min-h-screen">
+  <div className="bg-gradient-to-br from-light_orange-900 to-salmon_pink-900 min-h-screen">
         {/* Header */}
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-chocolate_cosmos">
                 Nos Partenaires
               </h1>
-              <p className="text-gray-600 mt-2">
+              <p className="text-blush-400 mt-2">
                 Profitez des avantages exclusifs avec votre carte BDE
               </p>
             </div>
@@ -52,7 +52,7 @@ export default function PartnersPage() {
                 onClick={() => setSelectedCategory("")}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   selectedCategory === ""
-                    ? "bg-purple-600 text-white"
+                    ? "bg-salmon_pink text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -64,7 +64,7 @@ export default function PartnersPage() {
                   onClick={() => setSelectedCategory(key)}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                     selectedCategory === key
-                      ? "bg-purple-600 text-white"
+                      ? "bg-salmon_pink text-white"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -95,7 +95,7 @@ export default function PartnersPage() {
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
                 >
                   {/* Partner Logo/Header */}
-                  <div className="bg-gradient-to-br from-purple-100 to-blue-100 p-8 flex items-center justify-center h-40">
+                  <div className="bg-gradient-to-br from-light_orange-800 to-salmon_pink-800 p-8 flex items-center justify-center h-40">
                     {partner.logo?.url ? (
                       <img
                         src={partner.logo.url}
@@ -112,24 +112,24 @@ export default function PartnersPage() {
                   {/* Content */}
                   <div className="p-6">
                     {/* Category Badge */}
-                    <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 mb-3">
+                    <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-salmon_pink text-white mb-3">
                       {PARTNER_CATEGORIES[partner.category]?.label}
                     </span>
 
                     {/* Name */}
-                    <h2 className="text-xl font-bold text-gray-900 mb-3">
+                    <h2 className="text-xl font-bold text-chocolate_cosmos mb-3">
                       {partner.name}
                     </h2>
 
                     {/* Description */}
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p className="text-chocolate_cosmos-400 text-sm mb-4 line-clamp-3">
                       {partner.description}
                     </p>
 
                     {/* Benefits */}
                     {partner.benefits && partner.benefits.length > 0 && (
                       <div className="mb-4">
-                        <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                        <h3 className="text-sm font-semibold text-chocolate_cosmos mb-2">
                           Avantages :
                         </h3>
                         <ul className="space-y-1">
@@ -141,7 +141,7 @@ export default function PartnersPage() {
                                 className="text-sm text-gray-700 flex items-start"
                               >
                                 <svg
-                                  className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                                  className="w-4 h-4 text-blush mr-2 mt-0.5 flex-shrink-0"
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                 >
@@ -164,7 +164,7 @@ export default function PartnersPage() {
                         href={partner.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium text-sm"
+                        className="inline-flex items-center text-raspberry_rose hover:text-raspberry_rose-600 font-medium text-sm"
                       >
                         Visiter le site
                         <svg
@@ -181,7 +181,7 @@ export default function PartnersPage() {
                     {/* Featured Badge */}
                     {partner.featured && (
                       <div className="mt-4 pt-4 border-t border-gray-200">
-                        <span className="inline-flex items-center text-xs font-medium text-yellow-700">
+                        <span className="inline-flex items-center text-xs font-medium text-salmon_pink">
                           <svg
                             className="w-4 h-4 mr-1"
                             fill="currentColor"

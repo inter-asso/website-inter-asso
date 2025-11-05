@@ -35,11 +35,11 @@ export default function EventListPage() {
 
   return (
     <PublicLayout>
-      <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 min-h-screen">
+  <div className="bg-gradient-to-br from-light_orange-900 to-salmon_pink-900 min-h-screen">
         {/* Header */}
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-gray-900">Événements</h1>
+            <h1 className="text-3xl font-bold text-chocolate_cosmos">Événements</h1>
           </div>
         </header>
 
@@ -52,7 +52,7 @@ export default function EventListPage() {
                 onChange={(e) =>
                   setFilters({ ...filters, category: e.target.value })
                 }
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blush"
               >
                 <option value="">Toutes les catégories</option>
                 {Object.entries(EVENT_CATEGORIES).map(([key, value]) => (
@@ -69,9 +69,9 @@ export default function EventListPage() {
                   onChange={(e) =>
                     setFilters({ ...filters, upcoming: e.target.checked })
                   }
-                  className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-blush focus:ring-blush border-gray-300 rounded"
                 />
-                <span className="text-sm text-gray-700">
+                <span className="text-sm text-chocolate_cosmos-400">
                   Événements à venir uniquement
                 </span>
               </label>
@@ -124,18 +124,18 @@ export default function EventListPage() {
                     )}
 
                     {/* Title */}
-                    <h2 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
+                    <h2 className="text-xl font-bold text-chocolate_cosmos mb-2 line-clamp-2">
                       {event.title}
                     </h2>
 
                     {/* Short Description */}
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    <p className="text-chocolate_cosmos-400 text-sm mb-4 line-clamp-2">
                       {event.shortDescription || event.description}
                     </p>
 
                     {/* Date & Location */}
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center text-sm text-gray-700">
+                      <div className="flex items-center text-sm text-chocolate_cosmos-400">
                         <svg
                           className="w-4 h-4 mr-2"
                           fill="currentColor"
@@ -149,7 +149,7 @@ export default function EventListPage() {
                         </svg>
                         {formatDate(event.date)} à {formatTime(event.startDate)}
                       </div>
-                      <div className="flex items-center text-sm text-gray-700">
+                      <div className="flex items-center text-sm text-chocolate_cosmos-400">
                         <svg
                           className="w-4 h-4 mr-2"
                           fill="currentColor"
@@ -167,7 +167,7 @@ export default function EventListPage() {
 
                     {/* Price & Category */}
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-purple-600">
+                      <span className="text-lg font-bold text-blush">
                         {formatPrice(event.price)}
                       </span>
                       <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700">
@@ -177,7 +177,7 @@ export default function EventListPage() {
 
                     {/* Upcoming Badge */}
                     {isUpcoming(event.date) && (
-                      <div className="mt-3 text-xs text-green-600 font-medium">
+                      <div className="mt-3 text-xs text-salmon_pink font-medium">
                         🟢 À venir
                       </div>
                     )}
